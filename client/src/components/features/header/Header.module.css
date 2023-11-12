@@ -1,5 +1,5 @@
 .main-header {
-    background-color: #005178;
+    /* background-color: #005178; */
     padding: 0.5em 0;
 }
 
@@ -23,13 +23,13 @@
     display: block;
     list-style: none;
     margin-left: 0.5em;
-    color: white;
+    color: black;
     font-size: 0.8em;
 }
 
 .main-heading {
     color: #7BCDCE;
-    font-weight: 300;
+    font-weight: 500;
     font-size: 1.2em;
     text-transform: uppercase;
 }
