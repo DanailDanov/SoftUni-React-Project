@@ -1,18 +1,20 @@
-// import {Routes, Route} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 
 import Header from "./components/features/header/Header";
 import Footer from "./components/features/footer/Footer";
 import Home from "./components/features/home/Home";
+import Login from "./components/features/users/login/Login";
 
 function App() {
   return (
     <>
       <Header />
       <main id="site-content">
-        {/* <Routes> */}
+        <Routes>
+        <Route  path='/' element={ <Home /> }/>
+        <Route  path='/login' element={ <Login /> }/>
 
-        <Home />
-        {/* </Routes> */}
+        </Routes>
       </main>
       <Footer />
     </>
