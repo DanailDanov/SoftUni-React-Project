@@ -10,15 +10,16 @@ export default function Header() {
                     </div>
                     <h1 className={styles['main-heading']}>Българска асоциация мини футбол</h1>
                 </div>
-               
+
                 <nav className={styles['main-nav']}>
                     <ul className={styles['nav-ul']}>
+                        <li>Новини</li>
                         <li>Създай отбор</li>
                         <li>Вход</li>
                         <li>Регистрация</li>
                     </ul>
                 </nav>
-                
+
             </div>
         </header>
     )
