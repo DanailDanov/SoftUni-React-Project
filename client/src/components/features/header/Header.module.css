@@ -27,6 +27,11 @@
     font-size: 0.8em;
 }
 
+.nav-ul li a {
+    text-decoration: none;
+    color: black;
+}
+
 .main-heading {
     color: #7BCDCE;
     font-weight: 500;

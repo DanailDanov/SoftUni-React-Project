@@ -4,6 +4,7 @@ import Header from "./components/features/header/Header";
 import Footer from "./components/features/footer/Footer";
 import Home from "./components/features/home/Home";
 import Login from "./components/features/users/login/Login";
+import Register from './components/features/users/register/Register';
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Routes>
         <Route  path='/' element={ <Home /> }/>
         <Route  path='/login' element={ <Login /> }/>
-
+        <Route  path='/register' element={ <Register /> }/>
         </Routes>
       </main>
       <Footer />

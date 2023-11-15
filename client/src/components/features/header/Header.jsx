@@ -17,10 +17,10 @@ export default function Header() {
 
                 <nav className={styles['main-nav']}>
                     <ul className={styles['nav-ul']}>
-                        <li><Link className='nav-li-link' to="/login">Новини</Link></li>
-                        <li><Link className='nav-li-link' to="/login">Създай Отбор</Link></li>
-                        <li><Link className='nav-li-link' to="/login">Вход</Link></li>
-                        <li><Link className='nav-li-link' to="/login">Регистрация</Link></li>
+                        <li><Link to="/news">Новини</Link></li>
+                        <li><Link to="/createTeam">Създай Отбор</Link></li>
+                        <li><Link to="/login">Вход</Link></li>
+                        <li><Link to="/register">Регистрация</Link></li>
                     </ul>
                 </nav>
 
