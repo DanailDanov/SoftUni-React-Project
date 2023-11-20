@@ -15,7 +15,7 @@ export default function Login() {
                     <Form.Label>Парола:</Form.Label>
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
-                <Button className={styles['submit-btn']} as="input" type="submit" value="Submit" />
+                <Button as="input" type="submit" value="Submit" />
             </Form>
         </div>
     );

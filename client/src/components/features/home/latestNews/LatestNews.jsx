@@ -46,7 +46,6 @@ export default function LatestNews() {
                     </Card.Body>
                 </Card>
                 </div>
-              
             </div>
         </div>
     );

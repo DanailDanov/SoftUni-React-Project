@@ -23,8 +23,8 @@ export default function Header() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item as={Link} href="/allNews">Всички новини</Dropdown.Item>
-                                <Dropdown.Item as={Link} href="/createNews">Създай новина</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/allNews">Всички новини</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/createNews">Създай новина</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown></li>
                         <li><Dropdown>
@@ -33,8 +33,8 @@ export default function Header() {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item as={Link} href="/allTeams">Всички отбори</Dropdown.Item>
-                                <Dropdown.Item as={Link} href="/createTeam">Създай отбор</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/allTeams">Всички отбори</Dropdown.Item>
+                                <Dropdown.Item as={Link} to="/createTeam">Създай отбор</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown></li>
                         <li><Link to="/login">Вход</Link></li>
