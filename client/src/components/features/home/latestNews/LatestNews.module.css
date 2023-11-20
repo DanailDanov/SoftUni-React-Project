@@ -5,6 +5,18 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+.card-items {
     display: flex;
     justify-content: space-between;
+}
+
+.latest-news-heading {
+    margin-bottom: 1em;
+    border-bottom: 1px solid black;
+}
+
+.latest-news-heading h2 {
+    text-align: center;
 }
