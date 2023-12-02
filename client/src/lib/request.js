@@ -42,3 +42,11 @@ const request = async (method, url, data) => {
 
     return result;
 }
+
+export const get = request.bind(null, 'GET');
+export const post = request.bind(null, 'POST');
+export const put = request.bind(null, 'PUT');
+export const remove = request.bind(null, 'DELETE');
+export const patch = request.bind(null, 'PATCH');
+
+
