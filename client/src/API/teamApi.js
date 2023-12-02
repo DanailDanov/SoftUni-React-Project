@@ -10,6 +10,13 @@ export const getAll = async () => {
     return data;
 }
 
+export const getOne = async (teamId) => {
+    const response = await fetch(`${baseUrl}/${teamId}`)
+    const result = await response.json();
+
+    return result;
+}
+
 // export const createTeam = async () => {
     
 // }
