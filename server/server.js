@@ -749,7 +749,7 @@
         };
     };
 
-    var require$$0 = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>SUPS Admin Panel</title>\r\n    <style>\r\n        * {\r\n            padding: 0;\r\n            margin: 0;\r\n        }\r\n\r\n        body {\r\n            padding: 32px;\r\n            font-size: 16px;\r\n        }\r\n\r\n        .layout::after {\r\n            content: '';\r\n            clear: both;\r\n            display: table;\r\n        }\r\n\r\n        .col {\r\n            display: block;\r\n            float: left;\r\n        }\r\n\r\n        p {\r\n            padding: 8px 16px;\r\n        }\r\n\r\n        table {\r\n            border-collapse: collapse;\r\n        }\r\n\r\n        caption {\r\n            font-size: 120%;\r\n            text-align: left;\r\n            padding: 4px 8px;\r\n            font-weight: bold;\r\n            background-color: #ddd;\r\n        }\r\n\r\n        table, tr, th, td {\r\n            border: 1px solid #ddd;\r\n        }\r\n\r\n        th, td {\r\n            padding: 4px 8px;\r\n        }\r\n\r\n        ul {\r\n            list-style: none;\r\n        }\r\n\r\n        .collection-list a {\r\n            display: block;\r\n            width: 120px;\r\n            padding: 4px 8px;\r\n            text-decoration: none;\r\n            color: black;\r\n            background-color: #ccc;\r\n        }\r\n        .collection-list a:hover {\r\n            background-color: #ddd;\r\n        }\r\n        .collection-list a:visited {\r\n            color: black;\r\n        }\r\n    </style>\r\n    <script type=\"module\">\nimport { html, render } from 'https://unpkg.com/lit-html?module';\nimport { until } from 'https://unpkg.com/lit-html/directives/until?module';\n\nconst api = {\r\n    async get(url) {\r\n        return json(url);\r\n    },\r\n    async post(url, body) {\r\n        return json(url, {\r\n            method: 'POST',\r\n            headers: { 'Content-Type': 'application/json' },\r\n            body: JSON.stringify(body)\r\n        });\r\n    }\r\n};\r\n\r\nasync function json(url, options) {\r\n    return await (await fetch('/' + url, options)).json();\r\n}\r\n\r\nasync function getCollections() {\r\n    return api.get('data');\r\n}\r\n\r\nasync function getRecords(collection) {\r\n    return api.get('data/' + collection);\r\n}\r\n\r\nasync function getThrottling() {\r\n    return api.get('util/throttle');\r\n}\r\n\r\nasync function setThrottling(throttle) {\r\n    return api.post('util', { throttle });\r\n}\n\nasync function collectionList(onSelect) {\r\n    const collections = await getCollections();\r\n\r\n    return html`\r\n    <ul class=\"collection-list\">\r\n        ${collections.map(collectionLi)}\r\n    </ul>`;\r\n\r\n    function collectionLi(name) {\r\n        return html`<li><a href=\"javascript:void(0)\" @click=${(ev) => onSelect(ev, name)}>${name}</a></li>`;\r\n    }\r\n}\n\nasync function recordTable(collectionName) {\r\n    const records = await getRecords(collectionName);\r\n    const layout = getLayout(records);\r\n\r\n    return html`\r\n    <table>\r\n        <caption>${collectionName}</caption>\r\n        <thead>\r\n            <tr>${layout.map(f => html`<th>${f}</th>`)}</tr>\r\n        </thead>\r\n        <tbody>\r\n            ${records.map(r => recordRow(r, layout))}\r\n        </tbody>\r\n    </table>`;\r\n}\r\n\r\nfunction getLayout(records) {\r\n    const result = new Set(['_id']);\r\n    records.forEach(r => Object.keys(r).forEach(k => result.add(k)));\r\n\r\n    return [...result.keys()];\r\n}\r\n\r\nfunction recordRow(record, layout) {\r\n    return html`\r\n    <tr>\r\n        ${layout.map(f => html`<td>${JSON.stringify(record[f]) || html`<span>(missing)</span>`}</td>`)}\r\n    </tr>`;\r\n}\n\nasync function throttlePanel(display) {\r\n    const active = await getThrottling();\r\n\r\n    return html`\r\n    <p>\r\n        Request throttling: </span>${active}</span>\r\n        <button @click=${(ev) => set(ev, true)}>Enable</button>\r\n        <button @click=${(ev) => set(ev, false)}>Disable</button>\r\n    </p>`;\r\n\r\n    async function set(ev, state) {\r\n        ev.target.disabled = true;\r\n        await setThrottling(state);\r\n        display();\r\n    }\r\n}\n\n//import page from '//unpkg.com/page/page.mjs';\r\n\r\n\r\nfunction start() {\r\n    const main = document.querySelector('main');\r\n    editor(main);\r\n}\r\n\r\nasync function editor(main) {\r\n    let list = html`<div class=\"col\">Loading&hellip;</div>`;\r\n    let viewer = html`<div class=\"col\">\r\n    <p>Select collection to view records</p>\r\n</div>`;\r\n    display();\r\n\r\n    list = html`<div class=\"col\">${await collectionList(onSelect)}</div>`;\r\n    display();\r\n\r\n    async function display() {\r\n        render(html`\r\n        <section class=\"layout\">\r\n            ${until(throttlePanel(display), html`<p>Loading</p>`)}\r\n        </section>\r\n        <section class=\"layout\">\r\n            ${list}\r\n            ${viewer}\r\n        </section>`, main);\r\n    }\r\n\r\n    async function onSelect(ev, name) {\r\n        ev.preventDefault();\r\n        viewer = html`<div class=\"col\">${await recordTable(name)}</div>`;\r\n        display();\r\n    }\r\n}\r\n\r\nstart();\n\n</script>\r\n</head>\r\n<body>\r\n    <main>\r\n        Loading&hellip;\r\n    </main>\r\n</body>\r\n</html>";
+    var require$$0 = "<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>SUPS Admin Panel</title>\r\n    <style>\r\n        * {\r\n            padding: 0;\r\n            margin: 0;\r\n        }\r\n\r\n        body {\r\n            padding: 32px;\r\n            font-size: 16px;\r\n        }\r\n\r\n        .layout::after {\r\n            content: '';\r\n            clear: both;\r\n            display: table;\r\n        }\r\n\r\n        .col {\r\n            display: block;\r\n            float: left;\r\n        }\r\n\r\n        p {\r\n            padding: 8px 16px;\r\n        }\r\n\r\n        table {\r\n            border-collapse: collapse;\r\n        }\r\n\r\n        caption {\r\n            font-size: 120%;\r\n            text-align: left;\r\n            padding: 4px 8px;\r\n            font-weight: bold;\r\n            background-color: #ddd;\r\n        }\r\n\r\n        table, tr, th, td {\r\n            border: 1px solid #ddd;\r\n        }\r\n\r\n        th, td {\r\n            padding: 4px 8px;\r\n        }\r\n\r\n        ul {\r\n            list-style: none;\r\n        }\r\n\r\n        .collection-list a {\r\n            display: block;\r\n            width: 120px;\r\n            padding: 4px 8px;\r\n            text-decoration: none;\r\n            color: black;\r\n            background-color: #ccc;\r\n        }\r\n        .collection-list a:hover {\r\n            background-color: #ddd;\r\n        }\r\n        .collection-list a:visited {\r\n            color: black;\r\n        }\r\n    </style>\r\n    <script type=\"module\">\nimport { html, render } from 'https://unpkg.com/lit-html@1.3.0?module';\nimport { until } from 'https://unpkg.com/lit-html@1.3.0/directives/until?module';\n\nconst api = {\r\n    async get(url) {\r\n        return json(url);\r\n    },\r\n    async post(url, body) {\r\n        return json(url, {\r\n            method: 'POST',\r\n            headers: { 'Content-Type': 'application/json' },\r\n            body: JSON.stringify(body)\r\n        });\r\n    }\r\n};\r\n\r\nasync function json(url, options) {\r\n    return await (await fetch('/' + url, options)).json();\r\n}\r\n\r\nasync function getCollections() {\r\n    return api.get('data');\r\n}\r\n\r\nasync function getRecords(collection) {\r\n    return api.get('data/' + collection);\r\n}\r\n\r\nasync function getThrottling() {\r\n    return api.get('util/throttle');\r\n}\r\n\r\nasync function setThrottling(throttle) {\r\n    return api.post('util', { throttle });\r\n}\n\nasync function collectionList(onSelect) {\r\n    const collections = await getCollections();\r\n\r\n    return html`\r\n    <ul class=\"collection-list\">\r\n        ${collections.map(collectionLi)}\r\n    </ul>`;\r\n\r\n    function collectionLi(name) {\r\n        return html`<li><a href=\"javascript:void(0)\" @click=${(ev) => onSelect(ev, name)}>${name}</a></li>`;\r\n    }\r\n}\n\nasync function recordTable(collectionName) {\r\n    const records = await getRecords(collectionName);\r\n    const layout = getLayout(records);\r\n\r\n    return html`\r\n    <table>\r\n        <caption>${collectionName}</caption>\r\n        <thead>\r\n            <tr>${layout.map(f => html`<th>${f}</th>`)}</tr>\r\n        </thead>\r\n        <tbody>\r\n            ${records.map(r => recordRow(r, layout))}\r\n        </tbody>\r\n    </table>`;\r\n}\r\n\r\nfunction getLayout(records) {\r\n    const result = new Set(['_id']);\r\n    records.forEach(r => Object.keys(r).forEach(k => result.add(k)));\r\n\r\n    return [...result.keys()];\r\n}\r\n\r\nfunction recordRow(record, layout) {\r\n    return html`\r\n    <tr>\r\n        ${layout.map(f => html`<td>${JSON.stringify(record[f]) || html`<span>(missing)</span>`}</td>`)}\r\n    </tr>`;\r\n}\n\nasync function throttlePanel(display) {\r\n    const active = await getThrottling();\r\n\r\n    return html`\r\n    <p>\r\n        Request throttling: </span>${active}</span>\r\n        <button @click=${(ev) => set(ev, true)}>Enable</button>\r\n        <button @click=${(ev) => set(ev, false)}>Disable</button>\r\n    </p>`;\r\n\r\n    async function set(ev, state) {\r\n        ev.target.disabled = true;\r\n        await setThrottling(state);\r\n        display();\r\n    }\r\n}\n\n//import page from '//unpkg.com/page/page.mjs';\r\n\r\n\r\nfunction start() {\r\n    const main = document.querySelector('main');\r\n    editor(main);\r\n}\r\n\r\nasync function editor(main) {\r\n    let list = html`<div class=\"col\">Loading&hellip;</div>`;\r\n    let viewer = html`<div class=\"col\">\r\n    <p>Select collection to view records</p>\r\n</div>`;\r\n    display();\r\n\r\n    list = html`<div class=\"col\">${await collectionList(onSelect)}</div>`;\r\n    display();\r\n\r\n    async function display() {\r\n        render(html`\r\n        <section class=\"layout\">\r\n            ${until(throttlePanel(display), html`<p>Loading</p>`)}\r\n        </section>\r\n        <section class=\"layout\">\r\n            ${list}\r\n            ${viewer}\r\n        </section>`, main);\r\n    }\r\n\r\n    async function onSelect(ev, name) {\r\n        ev.preventDefault();\r\n        viewer = html`<div class=\"col\">${await recordTable(name)}</div>`;\r\n        display();\r\n    }\r\n}\r\n\r\nstart();\n\n</script>\r\n</head>\r\n<body>\r\n    <main>\r\n        Loading&hellip;\r\n    </main>\r\n</body>\r\n</html>";
 
     const mode = process.argv[2] == '-dev' ? 'dev' : 'prod';
 
@@ -1315,13 +1315,11 @@
     }
 
     var rules = initPlugin$3;
-    // TODO: For login and register to use main property change with desired value
-    var identity = "test";
-    // TODO: Object USER data
+
+    var identity = "email";
     var protectedData = {
     	users: {
     		"35c62d76-8152-4626-8712-eeb96381bea8": {
-                test: "test",
     			email: "peter@abv.bg",
     			username: "Peter",
     			hashedPassword: "83313014ed3e2391aa1332615d2f053cf5c1bfe05ca1cbcb5582443822df6eb1"
@@ -1340,7 +1338,6 @@
     	sessions: {
     	}
     };
-    // TODO: Object USER data
     var seedData = {
     	recipes: {
     		"3987279d-0ad4-4afb-8ca9-5b256ae3b298": {
@@ -1481,21 +1478,7 @@
     		}
     	},
     	furniture: {
-"1240549d-f0e0-497e-ab99-eb8f522513d7": {
-        "img":"https://www.ikea.com/PIAimages/0447583_PE597395_S5.JPG",
-        "name": "Sofa",
-        "price": "259",
-        "decFactor":"0.4"
-
-    },
-    "143e5265-333e-4150-80e4-53b61de31aa0": {
-        "img":"https://www.stylespafurniture.com/wp-content/uploads/2020/03/Cove_3_Door_Wardrobe_1.jpg",
-        "name": "Wardrobe",
-        "price": "120",
-        "decFactor":"1.2"
-    }
-
-      	},
+    	},
     	orders: {
     	},
     	movies: {
@@ -1659,69 +1642,7 @@
     			_createdOn: 1616237272948,
     			_updatedOn: 1616237293676
     		}
-    	},
-        technique: {
-    		"53d4dbf5-7f41-47ba-b485-43eccb91cb95": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			type: "Лаптоп",
-    			model: "HP NEX-SPR-LT-11HP250G9I3",
-    			year: 2020,
-    			description: "Лаптопът HP 250 G9 предоставя основни бизнес функции в тънък и лек дизайн, който е лесен за носене навсякъде. 15,6-инчовият диагонален дисплей с голямо съотношение екран към тяло, мощен процесор Intel, бърза памет и място за съхранение осигуряват производителност, докато включените портове свързват вашите периферни устройства - всичко това на цена, която можете да оцените.",
-    			price: 235,
-    			img: "https://www.nexus-t.co.uk/resize.asp?File=products\NEX-SPR-LT-11HP250G9I3.jpg&Width=150&Height=200&C=false",
-    			os: "Windows OS",
-    			_createdOn: 1615545143015,
-    			_id: "53d4dbf5-7f41-47ba-b485-43eccb91cb95"
-    		},
-    		"f5929b5c-bca4-4026-8e6e-c09e73908f77": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			type: "Таблет",
-    			model: "Samsung Galaxy Tab A9",
-    			year: 2023,
-    			description: "Galaxy Tab A9, който има размер на екрана от 8,7 инча, предлага разделителна способност от 800 x 1340 пиксела и плътност на пикселите от приблизително 179 PPI на TFT LCD екран. Таблетът, който включва процесор MediaTek Helio G99 и графичен процесор Mali-G57 MC2, е с размери 211 x 124,7 x 8 mm.",
-    			price: 222,
-    			img: "https://www.kaksepravi.org/wp-content/uploads/2023/10/harakterisrika-i-tsena-na-samsung-galaxy-tab-a9.jpg",
-    			os: "Android OS",
-    			_createdOn: 1615545572296,
-    			_id: "f5929b5c-bca4-4026-8e6e-c09e73908f77"
-    		},
-    		"c7f51805-242b-45ed-ae3e-80b68605141b": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			type: "Компютър",
-    			model: "GAMING League i5-6500",
-    			year: 2023,
-    			description: "Настолен компютър GAMING League QUADCore Intel i5-6500 3.6Ghz TURBO, 16GB RAM DDR4, 1000GB SSD, VIDEO 8GB GDDR5 Radeon RX+ Подарък (клавиатура, мишка).",
-    			price: 890,
-    			img: "https://s13emagst.akamaized.net/products/35828/35827731/images/res_7dda5e376c3fb824e9d62e80b131835a.jpg?width=720&height=720&hash=C909C6F99164F7242A20AFCD0D87F888",
-    			os: "Windows OS",
-    			_createdOn: 1615546332126,
-    			_id: "c7f51805-242b-45ed-ae3e-80b68605141b"
-    		},
-    		"c7f51805-242b-45ed-ae3e-80b686051498": {
-    			_ownerId: "847ec027-f659-4086-8032-5173e2f9c93a",
-    			type: "Телефон",
-    			model: "Samsung Galaxy s23 ultra",
-    			year: 2023,
-    			description: "Samsung Galaxy s23 ultra прави ясни снимки и видеоклипове от здрач до зори. Най-съвременният и усъвършенстван сензор на камерата и най-бързият процесор на Galaxy се справят отлично при слаба светлина и намаляват шума.",
-    			price: 1950,
-    			img: "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s23-ultra-5g.jpg",
-    			os: "Android OS",
-    			_createdOn: 1615546332126,
-    			_id: "c7f51805-242b-45ed-ae3e-80b686051498"
-    		},
-            "f5929b5c-bca4-4026-8e6e-c09e73908f60": {
-    			_ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-    			type: "Таблет",
-    			model: "Samsung Galaxy Tab A9",
-    			year: 2023,
-    			description: "Galaxy Tab A9, който има размер на екрана от 8,7 инча, предлага разделителна способност от 800 x 1340 пиксела и плътност на пикселите от приблизително 179 PPI на TFT LCD екран. Таблетът, който включва процесор MediaTek Helio G99 и графичен процесор Mali-G57 MC2, е с размери 211 x 124,7 x 8 mm.",
-    			price: 222,
-    			img: "https://www.kaksepravi.org/wp-content/uploads/2023/10/harakterisrika-i-tsena-na-samsung-galaxy-tab-a9.jpg",
-    			os: "Android OS",
-    			_createdOn: 1615545572296,
-    			_id: "f5929b5c-bca4-4026-8e6e-c09e73908f60"
-    		}
-    	},
+    	}
     };
     var rules$1 = {
     	users: {

@@ -1,4 +1,6 @@
-import {Routes, Route} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
+
+import { AuthProvider } from './contexts/AuthContext';
 
 import Header from "./components/features/header/Header";
 import Footer from "./components/features/footer/Footer";
@@ -10,20 +12,22 @@ import AllTeams from './components/features/teams/allTeams/AllTeams';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
+      
       <Header />
       <main id="site-content">
         <Routes>
-        <Route  path='/' element={ <Home /> }/>
-        <Route  path='/allTeams' element={ <AllTeams /> }/>
-        <Route  path='/createTeam' element={ <CreateTeam /> }/>
+          <Route path='/' element={<Home />} />
+          <Route path='/allTeams' element={<AllTeams />} />
+          <Route path='/createTeam' element={<CreateTeam />} />
 
-        <Route  path='/login' element={ <Login /> }/>
-        <Route  path='/register' element={ <Register /> }/>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
         </Routes>
       </main>
       <Footer />
-    </>
+
+    </AuthProvider>
   )
 }
 
