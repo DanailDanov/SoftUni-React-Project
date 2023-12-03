@@ -1,2 +1,11 @@
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.login-form-container input {
+    display: block;
+    width: 100%;
+}
 

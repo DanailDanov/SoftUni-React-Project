@@ -13,11 +13,11 @@ export const login = (loginData) => request.post(`${baseUrl}/login`, loginData);
 //     return result;
 // };
 
-// export const register = (registerData) => request.post(`${baseUrl}/register`, registerData);
+export const register = (registerData) => request.post(`${baseUrl}/register`, registerData);
 
-// export const logout = () => {
+export const logout = () => {
 
-//     request.get(`${baseUrl}/logout`);
+    request.get(`${baseUrl}/logout`);
 
-//     localStorage.removeItem('user');
-// }
+    localStorage.removeItem('user');
+}

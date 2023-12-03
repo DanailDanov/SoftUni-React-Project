@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 
 import styles from './login.module.css'
 
-const formInitialState = {
+const loginInitialState = {
     email: '',
     password: '',
 };
@@ -34,17 +34,17 @@ export default function Login() {
     //     [LoginFormKyes.Password]: '',
     // });
 
-    const [formValues, setFormValues] = useState(formInitialState);
+    const [formValues, setFormValues] = useState(loginInitialState);
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});
 
     const resetFormHandler = () => {
-        setFormValues(formInitialState);
+        setFormValues(loginInitialState);
         setErrors({});
     };
 
-    const submitHandler = (values) => {
+    const loginSubmitHandler = (values) => {
 
         authApi.login(values)
             .then(user => {
@@ -61,7 +61,7 @@ export default function Login() {
         resetFormHandler();
     };
 
-    const { values, onChange, onSubmit } = useForm(submitHandler, formValues);
+    const { values, onChange, onSubmit } = useForm(loginSubmitHandler, formValues);
 
     // console.log(values);
 
