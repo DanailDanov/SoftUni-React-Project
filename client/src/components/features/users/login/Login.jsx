@@ -61,6 +61,36 @@ export default function Login() {
         resetFormHandler();
     };
 
+    function validateEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const emailValidator = () => {
+        if (!validateEmail(values.email)) {
+            setErrors(state => ({
+                ...state,
+                email: 'Email адреса не е валиден'
+            }))
+        } else {
+            if (errors.email) {
+                setErrors(state => ({ ...state, email: '' }));
+            }
+        }
+    };
+
+    const passwordValidator = () => {
+        if(values.password.length < 5) {
+            setErrors(state => ({
+                ...state,
+                password: 'Паролата трябва да бъде минимум 5 символа',
+            }));
+        } else {
+            if (errors.password) {
+                setErrors(state => ({ ...state, password: ''}));
+            }
+        }
+    }
     const { values, onChange, onSubmit } = useForm(loginSubmitHandler, formValues);
 
     // console.log(values);
@@ -76,8 +106,11 @@ export default function Login() {
                         placeholder="Enter email"
                         value={values.email}
                         onChange={onChange}
-
+                        onBlur={emailValidator}
                     />
+                    {errors.email && (
+                        <p className={styles.errorMessage}>{errors.email}</p>
+                    )}
                 </Form.Group>
                 <Form.Group className='mb-3' controlId="formGroupPassword">
                     <Form.Label>Парола:</Form.Label>
@@ -87,9 +120,20 @@ export default function Login() {
                         name='password'
                         value={values.password}
                         onChange={onChange}
+                        onBlur={passwordValidator}
                     />
+                      {errors.password && (
+                        <p className={styles.errorMessage}>{errors.password}</p>
+                    )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Submit" />
+                <Button as="input" type="submit" value="Submit"
+                disabled={(Object.values(errors).some(x => x) 
+                    || (Object.values(values).some(x => x == '')))}
+                />
+
+                {hasServerError && (
+                    <p className={styles.serverError}>{serverError}</p>
+                )}
             </Form>
         </div>
     );

@@ -8,3 +8,11 @@
     display: block;
     width: 100%;
 }
+
+.errorMessage {
+    color: red;
+}
+
+.serverError {
+    color: red;
+}

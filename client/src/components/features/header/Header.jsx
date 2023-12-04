@@ -18,7 +18,7 @@ export default function Header() {
         try {
             await authApi.logout();
 
-            console.log('danchoooooo');
+            // console.log('danchoooooo');
             setAuth(null);
 
             navigate('/');
