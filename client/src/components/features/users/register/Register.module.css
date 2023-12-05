@@ -1,11 +1,19 @@
-.login-form-container {
+.register-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.login-form-container input {
+.register-form-container input {
     display: block;
     width: 100%;
+}
+
+.errorMessage {
+    color: red;
+}
+
+.serverError {
+    color: red;
 }
 

@@ -80,17 +80,18 @@ export default function Login() {
     };
 
     const passwordValidator = () => {
-        if(values.password.length < 5) {
+        if (values.password.length < 5) {
             setErrors(state => ({
                 ...state,
                 password: 'Паролата трябва да бъде минимум 5 символа',
             }));
         } else {
             if (errors.password) {
-                setErrors(state => ({ ...state, password: ''}));
+                setErrors(state => ({ ...state, password: '' }));
             }
         }
     }
+
     const { values, onChange, onSubmit } = useForm(loginSubmitHandler, formValues);
 
     // console.log(values);
@@ -122,12 +123,12 @@ export default function Login() {
                         onChange={onChange}
                         onBlur={passwordValidator}
                     />
-                      {errors.password && (
+                    {errors.password && (
                         <p className={styles.errorMessage}>{errors.password}</p>
                     )}
                 </Form.Group>
                 <Button as="input" type="submit" value="Submit"
-                disabled={(Object.values(errors).some(x => x) 
+                    disabled={(Object.values(errors).some(x => x)
                     || (Object.values(values).some(x => x == '')))}
                 />
 

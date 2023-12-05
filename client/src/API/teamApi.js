@@ -1,13 +1,11 @@
-const baseUrl = 'http://localhost:3030/data/technique';
+import * as request from '../lib/request';
 
+const baseUrl = 'http://localhost:3030/data/footballTeams';
 
 export const getAll = async () => {
-    const response = await fetch (baseUrl);
-    const result = await response.json();
+    const result = await request.get(baseUrl);
 
-    const data = Object.values(result);
- 
-    return data;
+    return Object.values(result);
 }
 
 export const getOne = async (teamId) => {
@@ -17,6 +15,8 @@ export const getOne = async (teamId) => {
     return result;
 }
 
-// export const createTeam = async () => {
-    
-// }
+export const create = async (teamData) => {
+    const result = await request.post(baseUrl, teamData);
+
+    return result;
+}

@@ -4,9 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 export default function TeamCardItem({
-    productId,
+    teamId,
     name,
-    description,
     img
 }) {
 
@@ -17,10 +16,10 @@ export default function TeamCardItem({
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
                     <Card.Title>{name}</Card.Title>
-                    <Card.Text>
+                    {/* <Card.Text>
                         {description}
-                    </Card.Text>
-                    <Button as={Link} to={`/details/${productId}`} variant="primary">Виж повече</Button>
+                    </Card.Text> */}
+                    <Button as={Link} to={`/details/${teamId}`} variant="primary">Виж повече</Button>
                 </Card.Body>
             </Card>
     );
