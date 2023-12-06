@@ -14,7 +14,7 @@ export const getOne = async (teamId) => {
     return result;
 };
 
-export const create = async (teamData) => {
+export const createTeam = async (teamData) => {
     const result = await request.post(baseUrl, teamData);
 
     return result;

@@ -11,6 +11,9 @@ import CreateTeam from './components/features/teams/createTeam/CreateTeam';
 import AllTeams from './components/features/teams/allTeams/AllTeams';
 import DetailsTeam from './components/features/teams/detailsTeam/DetailsTeam';
 import EditTeam from './components/features/teams/editTeam/EditTeam';
+import CreateNews from './components/features/news/createNews/CreateNews';
+import AllNews from './components/features/news/allNews/AllNews';
+
 
 function App() {
   return (
@@ -24,6 +27,10 @@ function App() {
           <Route path='/createTeam' element={<CreateTeam />} />
           <Route path='/detailsTeam/:teamId' element={<DetailsTeam />} />
           <Route path='/edit/:teamId' element={<EditTeam />} />
+
+          <Route path='/allNews' element={<AllNews />} />
+          <Route path='/createNews' element={<CreateNews />} />
+
 
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />

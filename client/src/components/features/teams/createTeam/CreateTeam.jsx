@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 
 import styles from './createTeam.module.css';
 
-const createInitialState = {
+const createTeamInitialState = {
     teamName: '',
     dateOfCreation: '',
     img: '',
@@ -21,19 +21,19 @@ export default function CreateTeam() {
 
     const navigate = useNavigate();
 
-    const [formValues, setFormValues] = useState(createInitialState);
+    const [formValues, setFormValues] = useState(createTeamInitialState);
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});
 
     const resetFormHandler = () => {
-        setFormValues(createInitialState);
+        setFormValues(createTeamInitialState);
         setErrors({});
     };
 
-    const createSubmitHandler = (values) => {
+    const createTeamSubmitHandler = (values) => {
 
-        teamApi.create(values)
+        teamApi.createTeam(values)
             .then(() => navigate('/allTeams'))
             .catch(err => {
                 setHasServerError(true);
@@ -108,9 +108,7 @@ export default function CreateTeam() {
         }
     }
 
-
-
-    const { values, onChange, onSubmit } = useForm(createSubmitHandler, formValues);
+    const { values, onChange, onSubmit } = useForm(createTeamSubmitHandler, formValues);
 
     return (
         <div className={styles['create-form-container']}>
