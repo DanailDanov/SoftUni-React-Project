@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import * as teamApi from '../../../../API/teamApi';
-import { useNavigate } from 'react-router-dom';
 import useForm from '../../../../hooks/useForm';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import styles from './createTeam.module.css';
+import styles from './EditTeam.module.css';
 
-const createInitialState = {
+const editInitialState = {
     teamName: '',
     dateOfCreation: '',
     img: '',
@@ -17,30 +17,36 @@ const createInitialState = {
     achievements: '',
 };
 
-export default function CreateTeam() {
+export default function EditTeam() {
 
     const navigate = useNavigate();
+    const { teamId } = useParams();
 
-    const [formValues, setFormValues] = useState(createInitialState);
+    const [teamInfo, setTeamInfo] = useState(editInitialState);
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});
 
-    const resetFormHandler = () => {
-        setFormValues(createInitialState);
-        setErrors({});
-    };
 
-    const createSubmitHandler = (values) => {
+    useEffect(() => {
+        teamApi.getOne(teamId)
+            .then(result => setTeamInfo(result))
+            .catch(err => {
+                setHasServerError(true);
+                setServerError(err.message);
+            });
+    }, [teamId]);
 
-        teamApi.create(values)
-            .then(() => navigate('/allTeams'))
+    console.log(teamInfo);
+
+    const editSubmitHandler = (values) => {
+
+        teamApi.edit(teamId, values)
+            .then(() => navigate(`/detailsTeam/${teamId}`))
             .catch(err => {
                 setHasServerError(true);
                 setServerError(err.message)
             })
-
-        resetFormHandler();
     }
 
     const teamNameValidator = () => {
@@ -108,13 +114,12 @@ export default function CreateTeam() {
         }
     }
 
+    const { values, onChange, onSubmit } = useForm(editSubmitHandler, teamInfo);
 
-
-    const { values, onChange, onSubmit } = useForm(createSubmitHandler, formValues);
-
+    // console.log(values);
     return (
-        <div className={styles['create-form-container']}>
-            <Form onSubmit={onSubmit}>
+        <div className={styles['edit-form-container']}>
+            <Form method='POST' onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Име на отбора:</Form.Label>
                     <Form.Control
@@ -125,7 +130,7 @@ export default function CreateTeam() {
                         onChange={onChange}
                         onBlur={teamNameValidator}
                     />
-                     {errors.teamName && (
+                    {errors.teamName && (
                         <p className={styles.errorMessage}>{errors.teamName}</p>
                     )}
                 </Form.Group>
@@ -139,7 +144,7 @@ export default function CreateTeam() {
                         onChange={onChange}
                         onBlur={dateOfCreationValidator}
                     />
-                       {errors.dateOfCreation && (
+                    {errors.dateOfCreation && (
                         <p className={styles.errorMessage}>{errors.dateOfCreation}</p>
                     )}
                 </Form.Group>
@@ -153,7 +158,7 @@ export default function CreateTeam() {
                         onChange={onChange}
                         onBlur={imgValidator}
                     />
-                       {errors.img && (
+                    {errors.img && (
                         <p className={styles.errorMessage}>{errors.img}</p>
                     )}
                 </Form.Group>
@@ -167,7 +172,7 @@ export default function CreateTeam() {
                         onChange={onChange}
                         onBlur={descriptionValidator}
                     />
-                       {errors.description && (
+                    {errors.description && (
                         <p className={styles.errorMessage}>{errors.description}</p>
                     )}
                 </Form.Group>
@@ -181,15 +186,15 @@ export default function CreateTeam() {
                         onChange={onChange}
                         onBlur={achievementsValidator}
                     />
-                       {errors.achievements && (
+                    {errors.achievements && (
                         <p className={styles.errorMessage}>{errors.achievements}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Създай"
-                disabled={(Object.values(errors).some(x => x)
-                    || (Object.values(values).some(x => x == '')))}
+                <Button as="input" type="submit" value="Редактирай"
+                    disabled={(Object.values(errors).some(x => x)
+                        || (Object.values(values).some(x => x == '')))}
                 />
-                     {hasServerError && (
+                {hasServerError && (
                     <p className={styles.serverError}>{serverError}</p>
                 )}
             </Form>

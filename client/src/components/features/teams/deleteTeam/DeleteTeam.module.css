@@ -1,0 +1,69 @@
+.overlay {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
+
+.backdrop {
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100vh;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%; 
+    z-index: 30;
+}
+
+.modal {
+    width: 35rem;
+    position: absolute;
+    max-height: 90vh;
+    /* margin: auto; */
+    margin-left: 25%;
+    border-radius: 10px;
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+    z-index: 30;
+    margin-top: 50px;
+}
+
+.header {
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+
+.actions {
+    padding: 0 1em 2em 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.actions .button-delete {
+    width: 6em;
+    height: 2em;
+    margin-right: 20px;
+    background-color: #3B91C1;
+}
+
+.actions .button-cancel {
+    width: 6em;
+    height: 2em;
+    margin-right: 20px;
+    background-color: #198754
+}
+
+.actions button {
+    background: #2a87a5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: inherit;
+    font-weight: bold;
+}

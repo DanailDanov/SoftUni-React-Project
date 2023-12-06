@@ -27,7 +27,7 @@ export default function AllTeams() {
             .finally(() => setIsLoading(false));
     }, []);
 
-    console.log(teams);
+    // console.log(teams);
     return (
         <div className={styles['card-items']}>
 

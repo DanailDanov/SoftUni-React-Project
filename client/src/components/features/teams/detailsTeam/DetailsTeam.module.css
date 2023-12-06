@@ -1,0 +1,23 @@
+.team {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #666;
+    padding: 3em;
+    width: 50%;
+    gap: 2em;
+}
+
+.team button {
+    align-self:self-end;
+}
+.teamInfo-left-logo {
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    /* border: 3px solid #eee; */
+}
+
+.teamInfo-left-logo img {
+    width: 100%;
+    height: auto;
+}

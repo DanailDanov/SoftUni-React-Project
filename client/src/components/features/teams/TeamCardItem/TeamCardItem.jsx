@@ -19,7 +19,7 @@ export default function TeamCardItem({
                     {/* <Card.Text>
                         {description}
                     </Card.Text> */}
-                    <Button as={Link} to={`/details/${teamId}`} variant="primary">Виж повече</Button>
+                    <Button as={Link} to={`/detailsTeam/${teamId}`} variant="primary">Виж повече</Button>
                 </Card.Body>
             </Card>
     );

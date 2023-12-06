@@ -9,14 +9,25 @@ export const getAll = async () => {
 }
 
 export const getOne = async (teamId) => {
-    const response = await fetch(`${baseUrl}/${teamId}`)
-    const result = await response.json();
+    const result = await request.get(`${baseUrl}/${teamId}`);
 
     return result;
-}
+};
 
 export const create = async (teamData) => {
     const result = await request.post(baseUrl, teamData);
 
     return result;
-}
+};
+
+export const edit = async (teamId, teamData) => {
+    const result = await request.put(`${baseUrl}/${teamId}`, teamData);
+
+    return result;
+};
+
+export const remove = async (teamId) => {
+    const result = await request.remove(`${baseUrl}/${teamId}`);
+
+    return result;
+};
