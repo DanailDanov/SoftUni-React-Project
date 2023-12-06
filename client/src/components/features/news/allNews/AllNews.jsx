@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import * as newsApi from '../../../../API/newsApi';
 import Loader from '../../../shared/Loader';
 import NewsCardItem from "../newsCardItem/NewsCardItem";
+import formatDate from "../../../../utils/formatDate";
 
 import styles from './AllNews.module.css';
 
@@ -24,6 +25,7 @@ export default function AllNews() {
             .finally(() => setIsLoading(false));
     }, []);
 
+  
     // console.log(news);
     return (
         <div className={styles['card-items']}>
@@ -39,6 +41,7 @@ export default function AllNews() {
                                 newsId={news._id}
                                 newsHeader={news.newsHeader}
                                 img={news.img}
+                                createdOn={formatDate(news._createdOn)}
                             />
                         ))}
                     </>

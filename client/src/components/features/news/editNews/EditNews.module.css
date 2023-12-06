@@ -1,0 +1,14 @@
+.edit-form-container {
+    display: flex;
+    justify-content: center;
+    /* max-width: 800px; */
+}
+
+.errorMessage {
+    color: red;
+}
+
+.serverError {
+    color: red;
+}
+

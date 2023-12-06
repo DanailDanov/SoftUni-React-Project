@@ -13,3 +13,21 @@ export const createNews = async (newsData) => {
 
     return result;
 }
+
+export const getOne = async (newsId) => {
+    const result = await request.get(`${baseUrl}/${newsId}`);
+
+    return result;
+};
+
+export const editNews = async (newsId, newsData) => {
+    const result = await request.put(`${baseUrl}/${newsId}`, newsData);
+
+    return result;
+};
+
+export const remove = async (newsId) => {
+    const result = await request.remove(`${baseUrl}/${newsId}`);
+
+    return result;
+};

@@ -39,9 +39,9 @@ export default function EditTeam() {
 
     console.log(teamInfo);
 
-    const editSubmitHandler = (values) => {
+    const editTeamSubmitHandler = (values) => {
 
-        teamApi.edit(teamId, values)
+        teamApi.editTeam(teamId, values)
             .then(() => navigate(`/detailsTeam/${teamId}`))
             .catch(err => {
                 setHasServerError(true);
@@ -114,7 +114,7 @@ export default function EditTeam() {
         }
     }
 
-    const { values, onChange, onSubmit } = useForm(editSubmitHandler, teamInfo);
+    const { values, onChange, onSubmit } = useForm(editTeamSubmitHandler, teamInfo);
 
     // console.log(values);
     return (

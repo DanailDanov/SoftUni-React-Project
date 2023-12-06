@@ -20,7 +20,7 @@ export const createTeam = async (teamData) => {
     return result;
 };
 
-export const edit = async (teamId, teamData) => {
+export const editTeam = async (teamId, teamData) => {
     const result = await request.put(`${baseUrl}/${teamId}`, teamData);
 
     return result;

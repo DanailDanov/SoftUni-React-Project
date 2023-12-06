@@ -8,8 +8,9 @@
 }
 
 .team button {
-    align-self:self-end;
+    align-self: self-end;
 }
+
 .teamInfo-left-logo {
     width: 300px;
     height: auto;

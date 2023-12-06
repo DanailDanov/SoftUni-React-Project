@@ -9,8 +9,6 @@ import Loader from '../../../shared/Loader';
 import styles from './DetailsTeam.module.css'
 import DeleteTeam from '../deleteTeam/DeleteTeam';
 
-import Button from 'react-bootstrap/Button';
-
 
 export default function DetailsTeam() {
 
@@ -83,7 +81,7 @@ export default function DetailsTeam() {
             </div>
             {auth?._id === teamDetails._ownerId && (
                 <>
-                    <Link to={`/edit/${teamId}`}>EDIT</Link>
+                    <Link to={`/editTeam/${teamId}`}>EDIT</Link>
                     <a onClick={deleteHandler}>DELETE</a>
                 </>
             )}
