@@ -1,51 +1,77 @@
-import styles from './LatestNews.module.css'
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import * as newsApi from '../../../../API/newsApi';
+
+import LatestNewsCardItem from '../latestNewsCardItem/LatestNewsCardItem';
+import Loader from '../../../shared/Loader';
+import formatDate from "../../../../utils/formatDate";
+
+import styles from './LatestNews.module.css';
 
 export default function LatestNews() {
+
+    const [LatestNews, setLatestNews] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [hasServerError, setHasServerError] = useState(false);
+    const [serverError, setServerError] = useState({});
+
+    useEffect(() => {
+        setIsLoading(true)
+        newsApi.getLastNews()
+            .then(result => {
+                setLatestNews(result)
+            })
+            .catch(err => {
+                setHasServerError(true);
+                setServerError(err.message)
+            })
+            .finally(() => setIsLoading(false));
+    }, []);
+
+    // console.log(LatestNews);
     return (
         <div className={styles['main-container']}>
             <div className={styles['container']}>
                 <div className={styles['latest-news-heading']}>
                     <h2>Последни новини</h2>
                 </div>
-                
+
+                {isLoading && < Loader />}
+
+
+                {hasServerError && (
+                    <p className={styles.serverError}>Изникна проблем! Опитайте отново :)</p>
+                )}
+
                 <div className={styles['card-items']}>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="https://safenews.bg/wp-content/uploads/2023/11/395618224_368052452650996_6645346618426846369_n-jpg.webp" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
+                    {LatestNews.length > 0
+                        ? (
+                            <>
+                                {LatestNews.map(news => (
+                                    < LatestNewsCardItem
+                                        key={news._id}
+                                        newsId={news._id}
+                                        img={news.img}
+                                        newsHeader={news.newsHeader}
+                                        createdOn={formatDate(news._createdOn)}
+                                    />
+                                ))}
+
+                            </>
+                          )
+                        :
+                        <div>
+                            <p>Няма новини за показване!</p>
+                        </div>
+                    }
                 </div>
+
+            </div>
+            <div className={styles['all-News']}>
+                <Link to={'/allNews'}>
+                    Виж всички новини
+                </Link>
             </div>
         </div>
     );

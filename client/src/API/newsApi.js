@@ -31,3 +31,10 @@ export const remove = async (newsId) => {
 
     return result;
 };
+
+export const getLastNews = async () => {
+    const query = new URLSearchParams('offset=0&pageSize=3');
+    const result = await request.get(`${baseUrl}?sortBy=_createdOn%20desc&${query}`);
+
+    return result;
+};
