@@ -19,12 +19,13 @@
 .footer-top-ul {
     display: flex;
     align-items: center;
+    margin-left: -1.5em;
 }
 
 .footer-top-logo {
     width: 200px;
     margin-top: -70px;
-    margin-left: 1.8em;
+    margin-left: -0.5em;
 }
 
 .footer-top-ul li {
@@ -40,7 +41,7 @@
     font-size: 48px;
     text-align: center;
     margin: 0.5em 0;
-    margin-left: 0.6em;
+    margin-left: 0.2em;
 }
 
 .footer-top-ul li img {
@@ -59,23 +60,23 @@
 }
 
 .footer-bottom-right {
+    display: flex;
+    justify-content: flex-end;
+    /* align-items: center; */
+    /* justify-content: center; */
     width: 50%;
 }
 
 .footer-bottom-left-ul {
     display: flex;
     justify-content: flex-start;
+    margin-left: -2em;
 }
 
 .footer-bottom-right-ul {
     display: flex;
     justify-content: flex-end;
 }
-
-/* .footer-bottom-right-ul li a:focus,
-.footer-bottom-right-ul li a:hover {
-    text-decoration: underline;
-} */
 
 .footer-bottom-right-ul li {
    list-style: none;
@@ -95,9 +96,12 @@
 
 .copyright {
     text-align: right;
+    justify-content: center;
+    margin-top: 1.5em;
 }
 
 .copyright p {
+    font-size: 1.2em;
     width: 100%;
     color: #92c9e8;
 }

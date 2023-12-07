@@ -7,6 +7,7 @@ import LatestNewsCardItem from '../latestNewsCardItem/LatestNewsCardItem';
 import Loader from '../../../shared/Loader';
 import formatDate from "../../../../utils/formatDate";
 
+import Button from 'react-bootstrap/Button';
 import styles from './LatestNews.module.css';
 
 export default function LatestNews() {
@@ -59,7 +60,7 @@ export default function LatestNews() {
                                 ))}
 
                             </>
-                          )
+                        )
                         :
                         <div>
                             <p>Няма новини за показване!</p>
@@ -68,10 +69,8 @@ export default function LatestNews() {
                 </div>
 
             </div>
-            <div className={styles['all-News']}>
-                <Link to={'/allNews'}>
-                    Виж всички новини
-                </Link>
+            <div className={styles['see-all-btn']}>
+                <Button as={Link} to={`/allNews`} variant="primary">Виж всички новини</Button>
             </div>
         </div>
     );

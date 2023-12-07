@@ -13,10 +13,23 @@
 }
 
 .latest-news-heading {
-    margin-bottom: 1em;
+    margin-bottom: 2em;
     border-bottom: 1px solid black;
 }
 
 .latest-news-heading h2 {
     text-align: center;
+    font-weight: 600;
+}
+
+.see-all-btn {
+    margin-top: 1.5em;
+    display: flex;
+    justify-content: center;
+}
+
+.see-all-btn a {
+     /* background-color:#3B91C1; */
+     border: none;
+     padding: 1em 2em;
 }

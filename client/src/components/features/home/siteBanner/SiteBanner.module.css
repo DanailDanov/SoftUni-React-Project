@@ -1,6 +1,21 @@
-.slide-banner {
+/* .slide-banner {
     display: block;
     width: 100%;
     height: auto;
     object-fit: cover;
+    overflow: hidden;
+} */
+
+/* .carouselItemOne {
+    background-image: url('https://api.bamf.bg//uploads/16063856325181.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
 }
+
+.carouselItemTwo {
+    background-image: url('https://api.bamf.bg//uploads/16063856325181.jpeg');
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+} */

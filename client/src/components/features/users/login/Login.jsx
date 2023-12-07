@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import * as authApi from '../../../../API/authApi';
 
@@ -83,13 +83,16 @@ export default function Login() {
 
     return (
         <div className={styles['login-form-container']}>
-            <Form method='POST' onSubmit={onSubmit}>
+            <Form style={{ width: '30%' }} method='POST' onSubmit={onSubmit}>
+                <div className={styles['login-heading']} >
+                    <p>Влезте в профила си</p>
+                </div>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label>Е-мейл адрес:</Form.Label>
+                    <Form.Label>Имейл адрес:</Form.Label>
                     <Form.Control
                         type="email"
                         name='email'
-                        placeholder="Enter email"
+                        placeholder="Въведете имейл"
                         value={values.email}
                         onChange={onChange}
                         onBlur={emailValidator}
@@ -102,7 +105,7 @@ export default function Login() {
                     <Form.Label>Парола:</Form.Label>
                     <Form.Control
                         type="password"
-                        placeholder="Password"
+                        placeholder="Въведете парола"
                         name='password'
                         value={values.password}
                         onChange={onChange}
@@ -112,10 +115,16 @@ export default function Login() {
                         <p className={styles.errorMessage}>{errors.password}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Submit"
+                <Button style={{ width: '100%', fontSize: '1.3em', padding: '0.3em' }} as="input" type="submit" value="Влезте"
                     disabled={(Object.values(errors).some(x => x)
-                    || (Object.values(values).some(x => x == '')))}
+                        || (Object.values(values).some(x => x == '')))}
                 />
+
+                <div className={styles['register-here']}>
+                    <p >Все още нямате акаунт ?
+                        <span><Link to={'/register'}>Регистрирайте се</Link></span>
+                    </p>
+                </div>
 
                 {hasServerError && (
                     <p className={styles.serverError}>{serverError}</p>

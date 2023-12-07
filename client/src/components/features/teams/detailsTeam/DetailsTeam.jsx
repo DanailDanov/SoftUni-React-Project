@@ -4,11 +4,11 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import * as teamApi from '../../../../API/teamApi';
 
 import { AuthContext } from '../../../../contexts/AuthContext';
+import DeleteTeam from '../deleteTeam/DeleteTeam';
 import Loader from '../../../shared/Loader';
 
+import Button from 'react-bootstrap/Button';
 import styles from './DetailsTeam.module.css'
-import DeleteTeam from '../deleteTeam/DeleteTeam';
-
 
 export default function DetailsTeam() {
 
@@ -20,9 +20,6 @@ export default function DetailsTeam() {
     const [teamDetails, setTeamDetails] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [showDelete, setShowDelete] = useState(false);
-
-    // console.log(teamId);
-    // console.log(auth);
 
     useEffect(() => {
 
@@ -48,44 +45,46 @@ export default function DetailsTeam() {
             .catch(err => console.log(err.message))
 
     }
-    // console.log(teamDetails);
 
-    console.log(showDelete);
     return (
         <div className={styles['team']}>
+            <div className={styles['sub-container-team']}>
 
-            {isLoading && < Loader />}
+                {isLoading && < Loader />}
 
-            {showDelete && (
-                <DeleteTeam
-                    onClose={() => setShowDelete(false)}
-                    onDeleteTeam={onDeleteTeam}
-                />
-            )}
+                {showDelete && (
+                    <DeleteTeam
+                        onClose={() => setShowDelete(false)}
+                        onDeleteTeam={onDeleteTeam}
+                    />
+                )}
 
-            <div className={styles['teamInfo-left']}>
-                <div className={styles['teamInfo-left-logo']}>
-                    <img src={teamDetails.img} alt="" />
+                <div className={styles['teamInfo-left']}>
+                    <div className={styles['teamInfo-left-logo']}>
+                        <img src={teamDetails.img} alt="" />
+                    </div>
                 </div>
+                <div className={styles['teamInfo-right']}>
+                    <div className={styles['teamInfo-right-info']}>
+                        <p>Име на отбора: <span>{teamDetails.teamName}</span></p>
+                        <p>Описание на отбора: <span>{teamDetails.description}</span></p>
+                        <p>Постижения: <span>{teamDetails.achievements}</span> </p>
+                        <p>Дата на създаване: <span> {teamDetails.dateOfCreation} г.</span></p>
 
+                    </div>
+                    <div className={styles['teamInfo-right-btn']}>
+                        {auth?._id === teamDetails._ownerId && (
+                            <>
+                                <Button style={{ marginRight: '1em' }} as={Link} to={`/editTeam/${teamId}`} variant="primary">Редактирай</Button>
+                                <Button onClick={deleteHandler} variant="primary">Изтрий</Button>
+                            </>
+                        )}
+                    </div>
+                </div>
             </div>
-            <div className={styles['teamInfo-right']}>
-                <div className={styles['teamInfo-right-title']}>
-                    <p>{teamDetails.teamName}</p>
-                </div>
-                <div className={styles['teamInfo-right-info']}>
-                    <p>{teamDetails.description}</p>
-                    <p>{teamDetails.achievements}</p>
-                    <p>{teamDetails.dateOfCreation}</p>
-                </div>
-            </div>
-            {auth?._id === teamDetails._ownerId && (
-                <>
-                    <Link to={`/editTeam/${teamId}`}>EDIT</Link>
-                    <a onClick={deleteHandler}>DELETE</a>
-                </>
-            )}
+
 
         </div>
+
     );
 }

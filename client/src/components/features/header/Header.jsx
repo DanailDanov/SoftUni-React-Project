@@ -91,7 +91,7 @@ export default function Header() {
                             // GUEST
                             : <>
                                 <li><Link to="/allNews">Новини</Link></li>
-                                <li><Link to="/allTeams">Всички отбори</Link></li>
+                                <li><Link to="/allTeams">Отбори</Link></li>
 
                                 <li><Link to="/login">Вход</Link></li>
                                 <li><Link to="/register">Регистрация</Link></li>

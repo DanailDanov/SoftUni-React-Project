@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import * as authApi from '../../../../API/authApi';
 
@@ -104,12 +104,15 @@ export default function Register() {
 
     return (
         <div className={styles['register-form-container']}>
-            <Form method='POST' onSubmit={onSubmit}>
+            <Form style={{ width: '30%' }} method='POST' onSubmit={onSubmit}>
+                <div className={styles['register-heading']} >
+                    <p>Регистрирайте се</p>
+                </div>
                 <Form.Group className='mb-3' controlId="formGroupUsername">
                     <Form.Label>Потребителско име:</Form.Label>
                     <Form.Control
                         type="text"
-                        // placeholder="Password"
+                        placeholder="Въведете потребителско име"
                         name='username'
                         value={values.username}
                         onChange={onChange}
@@ -120,11 +123,11 @@ export default function Register() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label>Е-мейл адрес:</Form.Label>
+                    <Form.Label>Имейл адрес:</Form.Label>
                     <Form.Control
                         type="email"
                         name='email'
-                        // placeholder="Enter email"
+                        placeholder="Въведете имейл адрес"
                         value={values.email}
                         onChange={onChange}
                         onBlur={emailValidator}
@@ -137,7 +140,7 @@ export default function Register() {
                     <Form.Label>Парола:</Form.Label>
                     <Form.Control
                         type="password"
-                        // placeholder="Password"
+                        placeholder="Въведете парола"
                         name='password'
                         value={values.password}
                         onChange={onChange}
@@ -151,7 +154,7 @@ export default function Register() {
                     <Form.Label>Повтори парола:</Form.Label>
                     <Form.Control
                         type="password"
-                        // placeholder="Password"
+                        placeholder="Повторете паролата"
                         name='rePassword'
                         value={values.rePassword}
                         onChange={onChange}
@@ -161,11 +164,16 @@ export default function Register() {
                         <p className={styles.errorMessage}>{errors.rePassword}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Submit"
+                <Button style={{ width: '100%', fontSize: '1.3em', padding: '0.3em' }} as="input" type="submit" value="Регистрирайте се"
                     disabled={(Object.values(errors).some(x => x)
                         || (Object.values(values).some(x => x == '')))}
                 />
 
+                <div className={styles['login-here']}>
+                    <p>Имате акаунт ?
+                        <span><Link to={'/login'}>Влезте</Link></span>
+                    </p>
+                </div>
                 {hasServerError && (
                     <p className={styles.serverError}>{serverError}</p>
                 )}

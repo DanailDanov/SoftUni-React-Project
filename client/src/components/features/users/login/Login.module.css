@@ -4,12 +4,33 @@
     align-items: center;
 }
 
-.login-form-container input {
+/* .login-form-container input {
     display: block;
     width: 100%;
+} */
+
+.login-heading p {
+    font-size: 2em;
+    border-bottom: 1.5px solid black;
+    text-align: center;
+    width: 80%;
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
+.register-here {
+    margin-top: 1.5em;
+    margin-left: 3em;
+}
+
+.register-here span {
+    margin-left: 0.5em;
 }
 
 .errorMessage {
+    margin-top: 0.5em;
+    margin-left: 0.3em;
     color: red;
 }
 
