@@ -25,12 +25,25 @@
     margin-left: 0.5em;
     color: black;
     font-size: 0.8em;
+    /* align-items: center; */
 }
 
 .nav-ul li a {
     text-decoration: none;
     color: black;
 }
+
+.nav-ul li a:hover {
+    color:#3B91C1;
+}
+
+.dropdown-toggle:hover {
+    background-color: #215670; /* Change the background color on hover */
+  }
+
+  
+  
+
 
 .main-heading {
     color: #7BCDCE;

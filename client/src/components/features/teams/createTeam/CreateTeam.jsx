@@ -3,19 +3,20 @@ import { useState } from 'react';
 import * as teamApi from '../../../../API/teamApi';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../../hooks/useForm';
+import { createTeamInitialState } from '../../../../core/environments/constants';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './createTeam.module.css';
 
-const createTeamInitialState = {
-    teamName: '',
-    dateOfCreation: '',
-    img: '',
-    description: '',
-    achievements: '',
-};
+// const createTeamInitialState = {
+//     teamName: '',
+//     dateOfCreation: '',
+//     img: '',
+//     description: '',
+//     achievements: '',
+// };
 
 export default function CreateTeam() {
 

@@ -3,26 +3,19 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import * as teamApi from '../../../../API/teamApi';
 import useForm from '../../../../hooks/useForm';
+import { editTeamInitialState } from '../../../../core/environments/constants';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './EditTeam.module.css';
 
-const editInitialState = {
-    teamName: '',
-    dateOfCreation: '',
-    img: '',
-    description: '',
-    achievements: '',
-};
-
 export default function EditTeam() {
 
     const navigate = useNavigate();
     const { teamId } = useParams();
 
-    const [teamInfo, setTeamInfo] = useState(editInitialState);
+    const [teamInfo, setTeamInfo] = useState(editTeamInitialState);
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});

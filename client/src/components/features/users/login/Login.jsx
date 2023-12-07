@@ -6,33 +6,18 @@ import * as authApi from '../../../../API/authApi';
 import { AuthContext } from '../../../../contexts/AuthContext';
 import useForm from '../../../../hooks/useForm';
 
+import { loginInitialState } from '../../../../core/environments/constants';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './login.module.css'
-
-const loginInitialState = {
-    email: '',
-    password: '',
-};
-
-// const LoginFormKyes = {
-//     Email: 'email',
-//     Password: 'password',
-// };
 
 export default function Login() {
 
     const navigate = useNavigate();
 
     const { setAuth } = useContext(AuthContext);
-
-    // const { loginSubmitHandler } = useContext(AuthContext);
-
-    // const { values, onChange, onSubmit } = useForm(loginSubmitHandler, {
-    //     [LoginFormKyes.Email]: '',
-    //     [LoginFormKyes.Password]: '',
-    // });
 
     const [formValues, setFormValues] = useState(loginInitialState);
     const [errors, setErrors] = useState({});

@@ -1,9 +1,9 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import * as authApi from '../../../API/authApi';
 import { AuthContext } from '../../../contexts/AuthContext';
-
+import { ADMIN_ID } from '../../../core/environments/constants';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 import styles from './Header.module.css';
@@ -14,13 +14,16 @@ export default function Header() {
 
     const { auth, setAuth } = useContext(AuthContext);
 
+    const [showDropdownNews, setShowDropdownNews] = useState(false);
+    const [showDropdownTeams, setShowDropdownTeams] = useState(false);
+
     async function logoutHandler() {
         try {
             await authApi.logout();
 
             setAuth(null);
 
-            navigate('/');
+            navigate('/login');
         } catch (error) {
 
             setAuth(null);
@@ -28,6 +31,22 @@ export default function Header() {
             navigate('/login')
         }
     }
+
+    const handleMouseEnterNews = () => {
+        setShowDropdownNews(true);
+    };
+
+    const handleMouseLeaveNews = () => {
+        setShowDropdownNews(false);
+    };
+
+    const handleMouseEnterTeams = () => {
+        setShowDropdownTeams(true);
+    };
+
+    const handleMouseLeaveTeams = () => {
+        setShowDropdownTeams(false);
+    };
 
     return (
         <header className={styles['main-header']}>
@@ -46,17 +65,19 @@ export default function Header() {
                         {auth ?
                             // AUTH
                             <>
-                                <li><Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                <li><Dropdown style={{marginTop: '-0.2em'}} show={showDropdownNews} onMouseEnter={handleMouseEnterNews} onMouseLeave={handleMouseLeaveNews}>
+                                    <Dropdown.Toggle style={{ backgroundColor: 'white', color: 'black', border: 'none', fontSize: '1em'}}  id="dropdown-basic">
                                         Новини
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/allNews">Всички новини</Dropdown.Item>
-                                        <Dropdown.Item as={Link} to="/createNews">Създай новина</Dropdown.Item>
+                                        {ADMIN_ID === auth?._id && (
+                                            <Dropdown.Item as={Link} to="/createNews">Създай новина</Dropdown.Item>
+                                        )}
                                     </Dropdown.Menu>
                                 </Dropdown></li>
-                                <li><Dropdown>
-                                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                <li><Dropdown style={{marginTop: '-0.2em'}} show={showDropdownTeams} onMouseEnter={handleMouseEnterTeams} onMouseLeave={handleMouseLeaveTeams}>
+                                    <Dropdown.Toggle style={{ backgroundColor: 'white', color: 'black', border: 'none', fontSize: '1em'}}>
                                         Отбори
                                     </Dropdown.Toggle>
                                     <Dropdown.Menu>

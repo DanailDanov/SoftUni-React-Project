@@ -20,6 +20,7 @@ import Profile from './components/features/users/profile/Profile';
 import GuestGuard from './components/guards/GuestGuard';
 import AuthGuard from './components/guards/AuthGuard';
 import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
+
 function App() {
   return (
 

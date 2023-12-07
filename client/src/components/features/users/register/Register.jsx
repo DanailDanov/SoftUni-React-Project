@@ -5,18 +5,12 @@ import * as authApi from '../../../../API/authApi';
 
 import { AuthContext } from '../../../../contexts/AuthContext';
 import useForm from '../../../../hooks/useForm';
+import { registerInitialState } from '../../../../core/environments/constants';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './register.module.css'
-
-const registerInitialState = {
-    username: '',
-    email: '',
-    password: '',
-    rePassword: '',
-};
 
 export default function Register() {
     const navigate = useNavigate();

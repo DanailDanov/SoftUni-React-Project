@@ -3,17 +3,18 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import * as newsApi from '../../../../API/newsApi';
 import useForm from '../../../../hooks/useForm';
+import { editNewsInitialState } from '../../../../core/environments/constants';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './EditNews.module.css';
 
-const editNewsInitialState = {
-    newsHeader: '',
-    img: '',
-    text: '',
-};
+// const editNewsInitialState = {
+//     newsHeader: '',
+//     img: '',
+//     text: '',
+// };
 
 export default function EditNews() {
 

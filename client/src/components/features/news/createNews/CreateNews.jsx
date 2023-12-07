@@ -3,19 +3,14 @@ import { useState } from 'react';
 import * as newsApi from '../../../../API/newsApi';
 import { useNavigate } from 'react-router-dom';
 import useForm from '../../../../hooks/useForm';
+import { createNewsInitialState } from '../../../../core/environments/constants';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import styles from './CreateNews.module.css';
 
-const createNewsInitialState = {
-    newsHeader: '',
-    img: '',
-    text: '',
-};
-
-export default function CreateNews () {
+export default function CreateNews() {
 
     const navigate = useNavigate();
 
@@ -84,59 +79,59 @@ export default function CreateNews () {
 
     console.log(values);
 
-    return(
+    return (
         <div className={styles['create-form-container']}>
-        <Form onSubmit={onSubmit}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Заглавие:</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Въведете заглавие"
-                    name='newsHeader'
-                    value={values.newsHeader}
-                    onChange={onChange}
-                    onBlur={newsHeaderValidator}
+            <Form onSubmit={onSubmit}>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <Form.Label>Заглавие:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Въведете заглавие"
+                        name='newsHeader'
+                        value={values.newsHeader}
+                        onChange={onChange}
+                        onBlur={newsHeaderValidator}
+                    />
+                    {errors.newsHeader && (
+                        <p className={styles.errorMessage}>{errors.newsHeader}</p>
+                    )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+                    <Form.Label>Добавете снимка:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        placeholder="Добавете снимка"
+                        name='img'
+                        value={values.img}
+                        onChange={onChange}
+                        onBlur={imgValidator}
+                    />
+                    {errors.img && (
+                        <p className={styles.errorMessage}>{errors.img}</p>
+                    )}
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Текст:</Form.Label>
+                    <Form.Control
+                        as="textarea"
+                        rows={3}
+                        name='text'
+                        value={values.text}
+                        onChange={onChange}
+                        onBlur={textValidator}
+                    />
+                    {errors.text && (
+                        <p className={styles.errorMessage}>{errors.text}</p>
+                    )}
+                </Form.Group>
+                <Button as="input" type="submit" value="Създай"
+                    disabled={(Object.values(errors).some(x => x)
+                        || (Object.values(values).some(x => x == '')))}
                 />
-                 {errors.newsHeader && (
-                    <p className={styles.errorMessage}>{errors.newsHeader}</p>
+                {hasServerError && (
+                    <p className={styles.serverError}>{serverError}</p>
                 )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                <Form.Label>Добавете снимка:</Form.Label>
-                <Form.Control
-                    type="text"
-                    placeholder="Добавете снимка"
-                    name='img'
-                    value={values.img}
-                    onChange={onChange}
-                    onBlur={imgValidator}
-                />
-                   {errors.img && (
-                    <p className={styles.errorMessage}>{errors.img}</p>
-                )}
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Текст:</Form.Label>
-                <Form.Control
-                    as="textarea"
-                    rows={3}
-                    name='text'
-                    value={values.text}
-                    onChange={onChange}
-                    onBlur={textValidator}
-                />
-                   {errors.text && (
-                    <p className={styles.errorMessage}>{errors.text}</p>
-                )}
-            </Form.Group>
-            <Button as="input" type="submit" value="Създай"
-            disabled={(Object.values(errors).some(x => x)
-                || (Object.values(values).some(x => x == '')))}
-            />
-                 {hasServerError && (
-                <p className={styles.serverError}>{serverError}</p>
-            )}
-        </Form>
-    </div>
+            </Form>
+        </div>
     );
 }
