@@ -19,41 +19,43 @@ import NotFound from './components/features/notFound/NotFound';
 import Profile from './components/features/users/profile/Profile';
 import GuestGuard from './components/guards/GuestGuard';
 import AuthGuard from './components/guards/AuthGuard';
+import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 function App() {
   return (
-    <AuthProvider>
 
-      <Header />
-      <main id="site-content">
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/allTeams' element={<AllTeams />} />
-          <Route path='/detailsTeam/:teamId' element={<DetailsTeam />} />
+    <ErrorBoundary>
+      <AuthProvider>
+        <Header />
+        <main id="site-content">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/allTeams' element={<AllTeams />} />
+            <Route path='/detailsTeam/:teamId' element={<DetailsTeam />} />
 
-          <Route path='/allNews' element={<AllNews />} />
-          <Route path='/detailsNews/:newsId' element={<DetailsNews />} />
+            <Route path='/allNews' element={<AllNews />} />
+            <Route path='/detailsNews/:newsId' element={<DetailsNews />} />
 
-          <Route element={< AuthGuard />}>
-            <Route path='/createTeam' element={<CreateTeam />} />
-            <Route path='/editTeam/:teamId' element={<EditTeam />} />
+            <Route element={< AuthGuard />}>
+              <Route path='/createTeam' element={<CreateTeam />} />
+              <Route path='/editTeam/:teamId' element={<EditTeam />} />
 
-            <Route path='/createNews' element={<CreateNews />} />
-            <Route path='/editNews/:newsId' element={<EditNews />} />
+              <Route path='/createNews' element={<CreateNews />} />
+              <Route path='/editNews/:newsId' element={<EditNews />} />
 
-            <Route path='/profile' element={<Profile />} />
-          </Route>
+              <Route path='/profile' element={<Profile />} />
+            </Route>
 
-          <Route element={< GuestGuard />}>
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-          </Route>
+            <Route element={< GuestGuard />}>
+              <Route path='/login' element={<Login />} />
+              <Route path='/register' element={<Register />} />
+            </Route>
 
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
-
-    </AuthProvider>
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+      </AuthProvider>
+    </ErrorBoundary>
   )
 }
 
