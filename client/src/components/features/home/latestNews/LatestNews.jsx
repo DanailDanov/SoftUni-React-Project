@@ -41,7 +41,7 @@ export default function LatestNews() {
 
 
                 {hasServerError && (
-                    <p className={styles.serverError}>Изникна проблем! Опитайте отново :)</p>
+                    <p className={styles['serverError']}>Изникна проблем! Опитайте отново :)</p>
                 )}
 
                 <div className={styles['card-items']}>

@@ -15,6 +15,7 @@ import CreateNews from './components/features/news/createNews/CreateNews';
 import AllNews from './components/features/news/allNews/AllNews';
 import DetailsNews from './components/features/news/detailsNews/DetailsNews';
 import EditNews from './components/features/news/editNews/EditNews';
+import NotFound from './components/features/notFound/NotFound';
 
 
 function App() {
@@ -37,6 +38,9 @@ function App() {
 
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+
+          <Route path='*' element={<NotFound />} />
+
         </Routes>
       </main>
       <Footer />

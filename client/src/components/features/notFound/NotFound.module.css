@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+   margin: 0 auto;
+   justify-content: center;
+    background-color: #3B91C1;
+   /* align-items: center; */
+}
+
+.not-found-container {
+    text-align: center;
+    height: 60vh;
+    margin-top: 5em;
+    /* background-color: red; */
+}
+
+.main-heading {
+    color: white;
+    font-weight: 600;
+    font-size: 5em;
+}
+
+.btn {
+    margin-top: 1em;
+    font-size: 4em;
+    width: 100px;
+    padding: 1em 0;
+}
