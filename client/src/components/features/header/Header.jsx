@@ -18,7 +18,6 @@ export default function Header() {
         try {
             await authApi.logout();
 
-            // console.log('danchoooooo');
             setAuth(null);
 
             navigate('/');
@@ -41,18 +40,16 @@ export default function Header() {
                     </div>
                     <h1 className={styles['main-heading']}>Българска асоциация мини футбол</h1>
                 </div>
-
-
                 <nav className={styles['main-nav']}>
                     <ul className={styles['nav-ul']}>
 
                         {auth ?
+                            // AUTH
                             <>
                                 <li><Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Новини
                                     </Dropdown.Toggle>
-
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/allNews">Всички новини</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/createNews">Създай новина</Dropdown.Item>
@@ -62,14 +59,13 @@ export default function Header() {
                                     <Dropdown.Toggle variant="success" id="dropdown-basic">
                                         Отбори
                                     </Dropdown.Toggle>
-
                                     <Dropdown.Menu>
                                         <Dropdown.Item as={Link} to="/allTeams">Всички отбори</Dropdown.Item>
                                         <Dropdown.Item as={Link} to="/createTeam">Създай отбор</Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown></li>
+                                <li><Link to={'/profile'}>Профил</Link></li>
                                 <li onClick={logoutHandler}><Link >Изход</Link></li>
-
                             </>
                             // GUEST
                             : <>
@@ -82,7 +78,6 @@ export default function Header() {
                         }
                     </ul>
                 </nav>
-
             </div>
         </header>
     )

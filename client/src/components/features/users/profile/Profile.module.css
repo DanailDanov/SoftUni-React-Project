@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.profile-info img {
+    display: block;
+    width: 50%;
+    height: auto;
+    overflow: hidden;
+}

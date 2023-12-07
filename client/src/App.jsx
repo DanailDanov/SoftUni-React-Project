@@ -16,7 +16,7 @@ import AllNews from './components/features/news/allNews/AllNews';
 import DetailsNews from './components/features/news/detailsNews/DetailsNews';
 import EditNews from './components/features/news/editNews/EditNews';
 import NotFound from './components/features/notFound/NotFound';
-
+import Profile from './components/features/users/profile/Profile';
 
 function App() {
   return (
@@ -35,6 +35,8 @@ function App() {
           <Route path='/createNews' element={<CreateNews />} />
           <Route path='/detailsNews/:newsId' element={<DetailsNews />} />
           <Route path='/editNews/:newsId' element={<EditNews />} />
+          <Route path='/profile' element={<Profile />} />
+
 
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
