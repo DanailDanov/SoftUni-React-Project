@@ -17,32 +17,38 @@ import DetailsNews from './components/features/news/detailsNews/DetailsNews';
 import EditNews from './components/features/news/editNews/EditNews';
 import NotFound from './components/features/notFound/NotFound';
 import Profile from './components/features/users/profile/Profile';
-
+import GuestGuard from './components/guards/GuestGuard';
+import AuthGuard from './components/guards/AuthGuard';
 function App() {
   return (
     <AuthProvider>
-      
+
       <Header />
       <main id="site-content">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/allTeams' element={<AllTeams />} />
-          <Route path='/createTeam' element={<CreateTeam />} />
           <Route path='/detailsTeam/:teamId' element={<DetailsTeam />} />
-          <Route path='/editTeam/:teamId' element={<EditTeam />} />
 
           <Route path='/allNews' element={<AllNews />} />
-          <Route path='/createNews' element={<CreateNews />} />
           <Route path='/detailsNews/:newsId' element={<DetailsNews />} />
-          <Route path='/editNews/:newsId' element={<EditNews />} />
-          <Route path='/profile' element={<Profile />} />
 
+          <Route element={< AuthGuard />}>
+            <Route path='/createTeam' element={<CreateTeam />} />
+            <Route path='/editTeam/:teamId' element={<EditTeam />} />
 
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
+            <Route path='/createNews' element={<CreateNews />} />
+            <Route path='/editNews/:newsId' element={<EditNews />} />
+
+            <Route path='/profile' element={<Profile />} />
+          </Route>
+
+          <Route element={< GuestGuard />}>
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
+          </Route>
 
           <Route path='*' element={<NotFound />} />
-
         </Routes>
       </main>
       <Footer />
