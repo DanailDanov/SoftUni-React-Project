@@ -14,7 +14,7 @@ Bulgarian Association minifootball is my final project for the React course at S
 
 # Demo
 
- To swiftly check things out, you can try out the demo accounts listed below:
+ * To swiftly check things out, you can try out the demo accounts listed below:
  
     - Demo user 1:
         - Email: peter@abv.bg
