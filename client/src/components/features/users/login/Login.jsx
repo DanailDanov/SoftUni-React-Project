@@ -11,7 +11,7 @@ import { loginInitialState } from '../../../../core/environments/constants';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import styles from './login.module.css'
+import styles from './Login.module.css'
 
 export default function Login() {
 

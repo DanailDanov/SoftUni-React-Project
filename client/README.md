@@ -1,6 +1,4 @@
-
 # Bulgarian association minifootball
-danailllll
 
 Bulgarian association minifootball is my final project for the React course at SoftUni.The application is created with SoftUni practice server for backend and React for the frontend.
 
