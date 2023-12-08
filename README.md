@@ -41,21 +41,20 @@ Bulgarian Association minifootball is my final project for the React course at S
   - Edit and delete teams and news
 
 # Features 
-    * Public part visible without authentication:
-        - Home page - accessible by all users
-        - The Teams page provides concise details about each team, accompanied by a button for accessing more in-depth information.
-        - The register page requires users to input their username, email, password, and confirm password — ensuring all fields are mandatory for the creation of a new user account.
-        - The login page requires users to input a valid email and password for authentication.
+* Public part visible without authentication:
+   - Home page - accessible by all users
+   - The Teams page provides concise details about each team, accompanied by a button for accessing more in-depth information.
+   - The register page requires users to input their username, email, password, and confirm password — ensuring all fields are mandatory for the creation of a new user account.
+   - The login page requires users to input a valid email and password for authentication.
         
-    * The private part visible after successful authentication and authorization:
-
-        - Users can make their teams on the Create page.
-        - Profile page displays information specific to the currently logged-in user.
+* The private part visible after successful authentication and authorization:
+   - Users can make their teams on the Create page.
+   - Profile page displays information specific to the currently logged-in user.
 
  # Security 
-     - Guards: By using both public and private guards effectively, an application can maintain a balance—sharing essential information publicly while protecting sensitive functions and data.  
-     - 404 Page: A customized page for 404 errors gracefully manages undefined routes. 
-     - Error Boundary: Capture JavaScript errors throughout the child component tree, log the errors, and present a fallback UI instead of causing the entire app to crash.
+ - Guards: By using both public and private guards effectively, an application can maintain a balance—sharing essential information publicly while protecting sensitive functions and data.  
+ - 404 Page: A customized page for 404 errors gracefully manages undefined routes. 
+ - Error Boundary: Capture JavaScript errors throughout the child component tree, log the errors, and present a fallback UI instead of causing the entire app to crash.
 
 # Utilized Additional Libraries
  - React bootstrap
