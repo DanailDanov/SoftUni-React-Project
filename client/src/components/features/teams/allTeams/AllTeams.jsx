@@ -25,6 +25,7 @@ export default function AllTeams() {
             .finally(() => setIsLoading(false));
     }, []);
 
+    console.log(teams);
     return (
         <div className={styles['container']}>
 
@@ -33,6 +34,11 @@ export default function AllTeams() {
             <div className={styles['row']}>
 
                 {isLoading && < Loader />}
+
+                
+                {hasServerError && (
+                        <p>Изникна проблем! Моля, опитайте отново! </p>
+                    )}
 
                 {teams.length > 0
                     ? (

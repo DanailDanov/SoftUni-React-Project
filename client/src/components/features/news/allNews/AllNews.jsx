@@ -26,7 +26,6 @@ export default function AllNews() {
     }, []);
 
 
-    // console.log(news);
     return (
         <div className={styles['container']}>
 
@@ -35,6 +34,10 @@ export default function AllNews() {
             <div className={styles['row']}>
 
                 {isLoading && < Loader />}
+
+                {hasServerError && (
+                        <p>Изникна проблем! Моля, опитайте отново! </p>
+                    )}
 
                 {news.length > 0
                     ? (
