@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import * as authApi from '../../../../API/authApi';
@@ -21,6 +21,10 @@ export default function Register() {
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});
+
+    useEffect(() => {
+        document.title = 'Регистрация';
+    });
 
     const resetFormHandler = () => {
         setFormValues(registerInitialState);

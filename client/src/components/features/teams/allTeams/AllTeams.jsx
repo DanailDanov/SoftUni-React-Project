@@ -15,6 +15,7 @@ export default function AllTeams() {
     const [serverError, setServerError] = useState({});
 
     useEffect(() => {
+        document.title = 'Отбори'
         setIsLoading(true);
         teamApi.getAll()
             .then(result => setTeams(result))

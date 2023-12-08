@@ -15,6 +15,7 @@ export default function AllNews() {
     const [serverError, setServerError] = useState({});
 
     useEffect(() => {
+        document.title = 'Новини'
         setIsLoading(true);
         newsApi.allNews()
             .then(result => setNews(result))

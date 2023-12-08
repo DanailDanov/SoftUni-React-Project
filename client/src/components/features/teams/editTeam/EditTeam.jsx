@@ -22,6 +22,7 @@ export default function EditTeam() {
 
 
     useEffect(() => {
+        document.title = 'Редактиране на отбора'
         teamApi.getOne(teamId)
             .then(result => setTeamInfo(result))
             .catch(err => {

@@ -13,7 +13,8 @@ export default function LatestNewsCardItem({
         <Card style={{
             width: '18rem',
             height: '28rem',
-            overflow: 'hidden'
+            overflow: 'hidden',
+            boxShadow: '5px 5px 5px gray'
         }}>
             <Card.Img style={{
                 width: '100%',

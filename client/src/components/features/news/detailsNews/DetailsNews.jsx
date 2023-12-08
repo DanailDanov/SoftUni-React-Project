@@ -25,14 +25,18 @@ export default function DetailsNews() {
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
-
+        document.title = 'Подробна новина'
         newsApi.getOne(newsId)
             .then(result => {
                 setNewsDetails(result)
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                if (err.code == 404) {
+                    navigate('/notFound')
+                }
+            })
             .finally(() => setIsLoading(false))
-    }, [newsId]);
+    }, [newsId, navigate]);
 
     const deleteHandler = () => {
         setShowDelete(true)
@@ -72,12 +76,12 @@ export default function DetailsNews() {
                         <p>{newsDetails.text}</p>
                     </article>
                 </div>
-            {ADMIN_ID === auth?._id && (
-                <div className={styles['btn']}>
-                    <Button style={{ marginRight: '1em' }} as={Link} to={`/editNews/${newsId}`} variant="primary">Редактирай</Button>
-                    <Button onClick={deleteHandler} variant="primary">Изтрий</Button>
-                </div>
-            )}
+                {ADMIN_ID === auth?._id && (
+                    <div className={styles['btn']}>
+                        <Button style={{ marginRight: '1em' }} as={Link} to={`/editNews/${newsId}`} variant="primary">Редактирай</Button>
+                        <Button onClick={deleteHandler} variant="primary">Изтрий</Button>
+                    </div>
+                )}
             </div>
         </div>
     );

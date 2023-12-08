@@ -22,14 +22,18 @@ export default function DetailsTeam() {
     const [showDelete, setShowDelete] = useState(false);
 
     useEffect(() => {
-
+        document.title = 'Подробности за отбора'
         teamApi.getOne(teamId)
             .then(result => {
                 setTeamDetails(result)
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                if (err.code == 404) {
+                    navigate('/notFound')
+                }
+            })
             .finally(() => setIsLoading(false))
-    }, [teamId]);
+    }, [teamId, navigate]);
 
     const deleteHandler = () => {
         setShowDelete(true)

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { AuthContext } from '../../../../contexts/AuthContext';
 
@@ -9,7 +9,9 @@ export default function Profile() {
 
     const { auth } = useContext(AuthContext)
 
-    console.log(auth);
+    useEffect(() => {
+        document.title = 'Профил';
+    });
     return (
         <div className={styles['container']}>
             <Card style={{ width: '25rem', border: '2px solid #3B91C1', boxShadow: '5px 5px 5px gray' }}>

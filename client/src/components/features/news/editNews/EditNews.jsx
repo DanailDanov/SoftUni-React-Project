@@ -22,6 +22,7 @@ export default function EditNews() {
 
 
     useEffect(() => {
+        document.title = 'Редактиране на новина'
         newsApi.getOne(newsId)
             .then(result => setNewsInfo(result))
             .catch(err => {

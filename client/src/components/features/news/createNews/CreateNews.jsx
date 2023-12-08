@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import * as newsApi from '../../../../API/newsApi';
 import { useNavigate } from 'react-router-dom';
@@ -18,6 +18,10 @@ export default function CreateNews() {
     const [errors, setErrors] = useState({});
     const [hasServerError, setHasServerError] = useState(false);
     const [serverError, setServerError] = useState({});
+
+    useEffect(() => {
+        document.title = 'Създаване на новина';
+    })
 
     const resetFormHandler = () => {
         setFormValues(createNewsInitialState);
