@@ -27,18 +27,18 @@ Bulgarian Association minifootball is my final project for the React course at S
 # User Permissions
 
 * All users: 
-        - View all teams and news
-        - View details page
+  - View all teams and news
+  - View details page
 * Not-Logged User: 
-        - Login and register
+  - Login and register
 * Logged-In User:
-        - Create team 
-        - Profile page
+  - Create team 
+  - Profile page
 * Logged-In User (Owner) 
-        - Edit and delete their own teams   
+  - Edit and delete their own teams   
 * Logged-In User (Admin) 
-        - Create team and news
-        - Edit and delete teams and news
+  - Create team and news
+  - Edit and delete teams and news
 
 # Features 
     * Public part visible without authentication:
