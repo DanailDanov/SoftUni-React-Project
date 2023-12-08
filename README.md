@@ -15,6 +15,7 @@ Bulgarian Association minifootball is my final project for the React course at S
 # Demo
 
  To swiftly check things out, you can try out the demo accounts listed below:
+ 
      Demo user 1:
         - Email: peter@abv.bg
         - Password: 123456
@@ -24,6 +25,7 @@ Bulgarian Association minifootball is my final project for the React course at S
         - Password: admin
 
 # User Permissions
+
      All users: 
         - View all teams and news
         - View details page
