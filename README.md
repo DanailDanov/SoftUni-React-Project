@@ -16,29 +16,29 @@ Bulgarian association minifootball is my final project for the React course at S
 
 To swiftly check things out, you can try out the demo accounts listed below:
 
-    * Demo user 1:
+     Demo user 1:
         - Email: peter@abv.bg
         - Password: 123456
 
-    * Demo user 2: 
+     Demo user 2: 
         - Email: admin@abv.bg
         - Password: admin
 
 # User Permissions
 
-    * All users: 
+     All users: 
         - View all teams and news
         - View details pages
 
-    * Not-Logged User: 
+     Not-Logged User: 
         - Login and register
 
-    * Logged-In User:
+     Logged-In User:
         - Create team 
         - Profile page
 
-    * Logged-In User (Owner) 
-        - Edit and delete own teams
+     Logged-In User (Owner) 
+        - Edit and delete ther own teams
     
     * Logged-In User (Admin) 
         - Create team and news
@@ -48,15 +48,15 @@ To swiftly check things out, you can try out the demo accounts listed below:
 
     Public part visible without authentication:
 
-        * Home page - accessible by all users
-        * Teams page provides concise details about each team, accompanied by a button for accessing more in-depth information.
-        * Register page requires users to input their username, email, password, and confirm password — ensuring all fields are mandatory for the creation of a new user account.
-        * Login page requires users to input a valid email and password for authentication.
+        - Home page - accessible by all users
+        - The Teams page provides concise details about each team, accompanied by a button for accessing more in-depth information.
+        - Register page requires users to input their username, email, password, and confirm password — ensuring all fields are mandatory for the creation of a new user account.
+        - The login page requires users to input a valid email and password for authentication.
 
-    Private part visible after successful authentication and authorization:
+    The private part visible after successful authentication and authorization:
 
-        * Users can make their own teams on the Create page.
-        * Profile page displays information specific to the currently logged-in user.
+        - Users can make their own teams on the Create page.
+        - Profile page displays information specific to the currently logged-in user.
 
  # Security 
 
@@ -66,8 +66,8 @@ To swiftly check things out, you can try out the demo accounts listed below:
 
 # Utilized Additional Libraries
  
- * React boostrap
- * React router dom 
+ - React bootstrap
+ - React router dom 
  
    
 
