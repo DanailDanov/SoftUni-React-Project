@@ -10,12 +10,6 @@ import Button from 'react-bootstrap/Button';
 
 import styles from './EditNews.module.css';
 
-// const editNewsInitialState = {
-//     newsHeader: '',
-//     img: '',
-//     text: '',
-// };
-
 export default function EditNews() {
 
     const navigate = useNavigate();
@@ -78,7 +72,7 @@ export default function EditNews() {
         if (values.text.length < 5) {
             setErrors(state => ({
                 ...state,
-                text: 'Описанието трябва да бъде минимум 5 символа'
+                text: 'Текстът трябва да бъде минимум 5 символа'
             }))
         } else {
             if (errors.text) {
@@ -92,7 +86,10 @@ export default function EditNews() {
     // console.log(values);
     return (
         <div className={styles['edit-form-container']}>
-        <Form method='POST' onSubmit={onSubmit}>
+        <Form style={{ width: '30%' }} method='POST' onSubmit={onSubmit}>
+        <div className={styles['editNews-heading']} >
+                    <p>Редактирайте новината</p>
+                </div>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                 <Form.Label>Заглавие:</Form.Label>
                 <Form.Control
@@ -135,7 +132,11 @@ export default function EditNews() {
                     <p className={styles.errorMessage}>{errors.text}</p>
                 )}
             </Form.Group>
-            <Button as="input" type="submit" value="Създай"
+            <Button style={{
+                    width: '100%',
+                    fontSize: '1.3em',
+                    padding: '0.3em'
+                }} as="input" type="submit" value="Редактирай"
             disabled={(Object.values(errors).some(x => x)
                 || (Object.values(values).some(x => x == '')))}
             />

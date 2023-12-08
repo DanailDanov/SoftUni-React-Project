@@ -66,7 +66,7 @@ export default function CreateNews() {
         if (values.text.length < 5) {
             setErrors(state => ({
                 ...state,
-                text: 'Описанието трябва да бъде минимум 5 символа'
+                text: 'Текстът трябва да бъде минимум 5 символа'
             }))
         } else {
             if (errors.text) {
@@ -81,8 +81,11 @@ export default function CreateNews() {
 
     return (
         <div className={styles['create-form-container']}>
-            <Form onSubmit={onSubmit}>
+            <Form style={{ width: '30%' }} onSubmit={onSubmit}>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                    <div className={styles['createNews-heading']} >
+                        <p>Създайте новина</p>
+                    </div>
                     <Form.Label>Заглавие:</Form.Label>
                     <Form.Control
                         type="text"
@@ -124,7 +127,11 @@ export default function CreateNews() {
                         <p className={styles.errorMessage}>{errors.text}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Създай"
+                <Button style={{
+                    width: '100%',
+                    fontSize: '1.3em',
+                    padding: '0.3em'
+                }} as="input" type="submit" value="Създай"
                     disabled={(Object.values(errors).some(x => x)
                         || (Object.values(values).some(x => x == '')))}
                 />

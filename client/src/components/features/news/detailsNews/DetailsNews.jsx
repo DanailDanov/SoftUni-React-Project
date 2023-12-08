@@ -9,6 +9,7 @@ import { ADMIN_ID } from '../../../../core/environments/constants';
 
 import Loader from '../../../shared/Loader';
 
+import Button from 'react-bootstrap/Button';
 import styles from './DetailsNews.module.css';
 
 export default function DetailsNews() {
@@ -48,7 +49,6 @@ export default function DetailsNews() {
 
     }
 
-    // console.log(newsDetails);
     return (
         <div className={styles['news-box']}>
             {isLoading && < Loader />}
@@ -72,13 +72,13 @@ export default function DetailsNews() {
                         <p>{newsDetails.text}</p>
                     </article>
                 </div>
-            </div>
             {ADMIN_ID === auth?._id && (
-                <div>
-                     <Link to={`/editNews/${newsId}`}>EDIT</Link>
-                    <a onClick={deleteHandler}>DELETE</a>
+                <div className={styles['btn']}>
+                    <Button style={{ marginRight: '1em' }} as={Link} to={`/editNews/${newsId}`} variant="primary">Редактирай</Button>
+                    <Button onClick={deleteHandler} variant="primary">Изтрий</Button>
                 </div>
             )}
+            </div>
         </div>
     );
 }

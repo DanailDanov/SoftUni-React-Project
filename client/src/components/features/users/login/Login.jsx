@@ -115,7 +115,11 @@ export default function Login() {
                         <p className={styles.errorMessage}>{errors.password}</p>
                     )}
                 </Form.Group>
-                <Button style={{ width: '100%', fontSize: '1.3em', padding: '0.3em' }} as="input" type="submit" value="Влезте"
+                <Button style={{
+                    width: '100%',
+                    fontSize: '1.3em',
+                    padding: '0.3em'
+                }} as="input" type="submit" value="Влезте"
                     disabled={(Object.values(errors).some(x => x)
                         || (Object.values(values).some(x => x == '')))}
                 />

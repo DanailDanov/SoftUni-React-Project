@@ -10,14 +10,6 @@ import Button from 'react-bootstrap/Button';
 
 import styles from './createTeam.module.css';
 
-// const createTeamInitialState = {
-//     teamName: '',
-//     dateOfCreation: '',
-//     img: '',
-//     description: '',
-//     achievements: '',
-// };
-
 export default function CreateTeam() {
 
     const navigate = useNavigate();
@@ -100,7 +92,7 @@ export default function CreateTeam() {
         if (values.achievements.length < 5) {
             setErrors(state => ({
                 ...state,
-                achievements: 'Описанието трябва да бъде минимум 5 символа'
+                achievements: 'Постиженията трябва да бъдат минимум 5 символа'
             }))
         } else {
             if (errors.achievements) {
@@ -113,7 +105,10 @@ export default function CreateTeam() {
 
     return (
         <div className={styles['create-form-container']}>
-            <Form onSubmit={onSubmit}>
+            <Form  style={{ width: '30%' }} onSubmit={onSubmit}>
+            <div className={styles['create-heading']} >
+                    <p>Създайте отбор</p>
+                </div>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Име на отбора:</Form.Label>
                     <Form.Control
@@ -129,7 +124,7 @@ export default function CreateTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                    <Form.Label>Дата на създаване</Form.Label>
+                    <Form.Label>Дата на създаване:</Form.Label>
                     <Form.Control
                         type="number"
                         placeholder="Въведете дата на създаване"
@@ -143,7 +138,7 @@ export default function CreateTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                    <Form.Label>Добави снимка:</Form.Label>
+                    <Form.Label>Добавете снимка:</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Добавете снимка"
@@ -157,7 +152,7 @@ export default function CreateTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Описание на отбора</Form.Label>
+                    <Form.Label>Описание на отбора:</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -171,7 +166,7 @@ export default function CreateTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
-                    <Form.Label>Постижения</Form.Label>
+                    <Form.Label>Постижения:</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -184,7 +179,11 @@ export default function CreateTeam() {
                         <p className={styles.errorMessage}>{errors.achievements}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Създай"
+                <Button style={{
+                    width: '100%',
+                    fontSize: '1.3em',
+                    padding: '0.3em'
+                }} as="input" type="submit" value="Създай"
                 disabled={(Object.values(errors).some(x => x)
                     || (Object.values(values).some(x => x == '')))}
                 />

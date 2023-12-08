@@ -25,32 +25,37 @@ export default function AllNews() {
             .finally(() => setIsLoading(false));
     }, []);
 
-  
+
     // console.log(news);
     return (
-        <div className={styles['card-items']}>
+        <div className={styles['container']}>
 
-            {isLoading && < Loader />}
+            <h1 className={styles['h1']}>Новини</h1>
 
-            {news.length > 0
-                ? (
-                    <>
-                        {news.map(news => (
-                            <NewsCardItem
-                                key={news._id}
-                                newsId={news._id}
-                                newsHeader={news.newsHeader}
-                                img={news.img}
-                                createdOn={formatDate(news._createdOn)}
-                            />
-                        ))}
-                    </>
-                )
-                :
-                <div>
-                    <p>Няма новини за показване!</p>
-                </div>
-            }
+            <div className={styles['row']}>
+
+                {isLoading && < Loader />}
+
+                {news.length > 0
+                    ? (
+                        <>
+                            {news.map(news => (
+                                <NewsCardItem
+                                    key={news._id}
+                                    newsId={news._id}
+                                    newsHeader={news.newsHeader}
+                                    img={news.img}
+                                    createdOn={formatDate(news._createdOn)}
+                                />
+                            ))}
+                        </>
+                    )
+                    :
+                    <div>
+                        <p>Няма новини за показване!</p>
+                    </div>
+                }
+            </div>
         </div>
     );
 } 

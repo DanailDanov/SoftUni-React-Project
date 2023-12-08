@@ -98,7 +98,7 @@ export default function EditTeam() {
         if (values.achievements.length < 5) {
             setErrors(state => ({
                 ...state,
-                achievements: 'Описанието трябва да бъде минимум 5 символа'
+                achievements: 'Постиженията трябва да бъдат минимум 5 символа'
             }))
         } else {
             if (errors.achievements) {
@@ -112,7 +112,10 @@ export default function EditTeam() {
     // console.log(values);
     return (
         <div className={styles['edit-form-container']}>
-            <Form method='POST' onSubmit={onSubmit}>
+            <Form style={{ width: '30%' }} method='POST' onSubmit={onSubmit}>
+            <div className={styles['editTeam-heading']} >
+                    <p>Редактирайте отбора</p>
+                </div>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                     <Form.Label>Име на отбора:</Form.Label>
                     <Form.Control
@@ -128,7 +131,7 @@ export default function EditTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                    <Form.Label>Дата на създаване</Form.Label>
+                    <Form.Label>Дата на създаване:</Form.Label>
                     <Form.Control
                         type="number"
                         placeholder="Въведете дата на създаване"
@@ -142,7 +145,7 @@ export default function EditTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                    <Form.Label>Добави снимка:</Form.Label>
+                    <Form.Label>Добавете снимка:</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Добавете снимка"
@@ -156,7 +159,7 @@ export default function EditTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Описание на отбора</Form.Label>
+                    <Form.Label>Описание на отбора:</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -170,7 +173,7 @@ export default function EditTeam() {
                     )}
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea2">
-                    <Form.Label>Постижения</Form.Label>
+                    <Form.Label>Постижения:</Form.Label>
                     <Form.Control
                         as="textarea"
                         rows={3}
@@ -183,7 +186,11 @@ export default function EditTeam() {
                         <p className={styles.errorMessage}>{errors.achievements}</p>
                     )}
                 </Form.Group>
-                <Button as="input" type="submit" value="Редактирай"
+                <Button style={{
+                    width: '100%',
+                    fontSize: '1.3em',
+                    padding: '0.3em'
+                }} as="input" type="submit" value="Редактирай"
                     disabled={(Object.values(errors).some(x => x)
                         || (Object.values(values).some(x => x == '')))}
                 />

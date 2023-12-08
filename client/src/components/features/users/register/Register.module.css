@@ -32,6 +32,7 @@
 }
 
 .serverError {
+    margin-left: 5em;
     color: red;
 }
 

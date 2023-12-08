@@ -10,15 +10,35 @@ export default function TeamCardItem({
     createdOn,
 }) {
     return (
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={img} />
-                <Card.Body>
-                    <Card.Title>{newsHeader}</Card.Title>
-                     <Card.Text>
-                       Добавена на: {createdOn}
+        <div>
+            <Card style={{
+                width: '25rem',
+                height: '35rem',
+                overflow: 'hidden',
+                border: 'solid #3B91C1',
+                borderRadius: '20px solid red',
+                boxShadow: '5px 5px 5px gray',
+
+            }}>
+                <Card.Img style={{
+                    width: '100%',
+                    height: '240px',
+                    maxHeight: '240px',
+                    borderBottom: '1px solid black',
+                }} variant="top" src={img} />
+
+                <Card.Body as={'div'} style={{ display: 'flex', flexDirection: 'column', }}>
+                    <Card.Title style={{
+                        fontSize: '1.5em',
+                        marginBottom: '1em',
+                        marginTop: 'auto'
+                    }} >{newsHeader}</Card.Title>
+                    <Card.Text style={{ marginTop: 'auto' }}>
+                        Добавена на: {createdOn}
                     </Card.Text>
-                    <Button as={Link} to={`/detailsNews/${newsId}`} variant="primary">Виж повече</Button>
+                    <Button style={{ marginTop: 'auto', width: '40%', }} as={Link} to={`/detailsNews/${newsId}`} variant="primary">Виж повече</Button>
                 </Card.Body>
             </Card>
+        </div>
     );
 }

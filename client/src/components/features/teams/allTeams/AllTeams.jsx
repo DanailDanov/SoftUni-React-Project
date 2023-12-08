@@ -27,6 +27,9 @@ export default function AllTeams() {
 
     return (
         <div className={styles['container']}>
+
+            <h1 className={styles['h1']}>Отбори</h1>
+
             <div className={styles['row']}>
 
                 {isLoading && < Loader />}

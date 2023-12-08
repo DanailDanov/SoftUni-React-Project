@@ -1,6 +1,40 @@
-.card-items {
+.container {
+    width: 100%;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.row {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
-    /* margin: 0 auto; */
+    gap: 2em;
+    margin-top: 2em;
+}
+
+h1 {
+    overflow: hidden;
+    text-align: start;
+    /* color: red; */
+    /* margin-bottom: 5em; */
+}
+
+h1::before,
+h1::after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 81%;
+}
+
+h1::before {
+    right: 0.5em;
+    margin-left: -81%;
+}
+
+h1::after {
+    left: 0.5em;
+    margin-right: -81%;
 }

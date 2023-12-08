@@ -4,11 +4,23 @@
     /* max-width: 800px; */
 }
 
+.editNews-heading p {
+    font-size: 2em;
+    border-bottom: 1.5px solid black;
+    text-align: center;
+    width: 90%;
+    margin-left: 0.5em;
+    margin-bottom: 1em;
+    font-weight: 500;
+}
+
 .errorMessage {
+    margin-top: 0.5em;
+    margin-left: 0.3em;
     color: red;
 }
 
 .serverError {
+    margin-left: 5em;
     color: red;
 }
-
