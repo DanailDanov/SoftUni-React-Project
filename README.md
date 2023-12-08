@@ -13,7 +13,8 @@ Bulgarian Association minifootball is my final project for the React course at S
     - npm run dev - runs the app;
 
 # Demo
-To swiftly check things out, you can try out the demo accounts listed below:
+
+ To swiftly check things out, you can try out the demo accounts listed below:
      Demo user 1:
         - Email: peter@abv.bg
         - Password: 123456
@@ -38,14 +39,15 @@ To swiftly check things out, you can try out the demo accounts listed below:
         - Edit and delete teams and news
 
 # Features 
-    Public part visible without authentication:
+    * Public part visible without authentication:
         - Home page - accessible by all users
         - The Teams page provides concise details about each team, accompanied by a button for accessing more in-depth information.
         - The register page requires users to input their username, email, password, and confirm password — ensuring all fields are mandatory for the creation of a new user account.
         - The login page requires users to input a valid email and password for authentication.
-    The private part visible after successful authentication and authorization:
+        
+    *The private part visible after successful authentication and authorization:
 
-        - Users can make their own teams on the Create page.
+        - Users can make their teams on the Create page.
         - Profile page displays information specific to the currently logged-in user.
 
  # Security 
