@@ -23,7 +23,6 @@ import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
 
 function App() {
   return (
-
     <ErrorBoundary>
       <AuthProvider>
         <Header />
